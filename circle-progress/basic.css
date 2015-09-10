@@ -1,0 +1,26 @@
+.circle {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 100px auto 0 auto;
+  line-height: 400px;
+  text-align: center;
+}
+
+
+.controls {
+  text-align: center;
+  margin-top: 50px;
+}
+.controls input[type=text] {
+  outline: none;
+  width: 50px;
+  border-radius: 12px;
+  text-align: center;
+}
+.controls input[type=range] {
+  width: 90px;
+}
+.controls input, .controls button {
+  margin: 8px;
+}

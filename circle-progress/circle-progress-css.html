@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimal-ui">
+
+    <link rel="stylesheet" href="basic.css">
+    <script src="basic.js"></script>
+</head>
+<body>
+
+
+    <div class="circle">
+        content
+    </div>
+
+    <script>
+        function CircleProgress (opts) {
+            this.radius = opts.radius || 60;
+            this.border = opts.border || 4;
+            this.bgColor = opts.bgColor || 'lightgray';
+            this.fgColor = opts.fgColor || 'greenyellow';
+
+            this.size = this.radius * 2;
+            this.outerRadius = this.radius + this.border;
+
+            this.root = document.createElement('div');
+            this._init();
+            opts.container.appendChild(this.root);
+
+            var children = this.root.children;
+            this.left = children[0];
+            this.right = children[1];
+            this.reset();
+        }
+
+        CircleProgress.prototype = {
+            _objectToCssText: function (obj) {
+                var key, res = [];
+                for (key in obj) {
+                    if (obj.hasOwnProperty(key)) {
+                        res.push(key + ': ' + (typeof obj[key] === 'number' ? obj[key] + 'px' : obj[key]) + ';');
+                    }
+                }
+                return res.join(' ');
+            },
+            _init: function () {
+                var circleCssText = this._objectToCssText({
+                    position: 'absolute',
+                    width: this.size,
+                    height: this.size,
+                    'border-radius': '50%',
+                    border: this.border + 'px' + ' solid ' + this.bgColor,
+                    'pointer-events': 'none',
+                    'box-sizing': 'content-box' // 避免触屏端经常将设置全局的 border-box
+                });
+
+                var leftMaskCssText = this._objectToCssText({
+                        position: 'absolute',
+                        overflow: 'hidden',
+                        bottom: - this.border,
+                        right: this.radius
+                    });
+                var rightMaskCssText = this._objectToCssText({
+                        position: 'absolute',
+                        overflow: 'hidden',
+                        top: - this.border,
+                        left: this.radius
+                    });
+
+                this.root.style.cssText = circleCssText + 'top: 0; left: 0;';
+
+                // 内部圆块的样式
+                circleCssText += 'border-color: ' + this.fgColor + ';';
+                this.root.innerHTML = '<div style="' + leftMaskCssText + '">' +
+                    '<i style="' + circleCssText + ' right: -' + this.outerRadius + 'px; bottom: 0;"></i>' +
+                    '</div>' +
+                    '<div style="' + rightMaskCssText + '">' +
+                    '<i style="' + circleCssText + ' left: -' + this.outerRadius + 'px; top: 0;"></i>' +
+                    '</div>';
+            },
+            _set: function (side, width, height) {
+                var style = this[side].style;
+                style.width = (width || 0) + 'px';
+                style.height = (height || 0) + 'px';
+            },
+            get: function () { return this.progress; },
+            reset: function () {
+                this.progress = 0;
+                this._set('left');
+                this._set('right');
+            },
+            end: function () { this.go(100); },
+            go: function (progress) {
+                progress = parseFloat(progress);
+
+                if (isNaN(progress) || progress < 0) progress = 0;
+                if (progress > 100) progress = 100;
+                var width, height;
+                var deg = 2 * (progress / 100) * Math.PI;
+                var outerRadius = this.outerRadius;
+
+                if (progress < 50) {
+                    height = outerRadius * (1 - Math.cos(deg));
+                    if (progress < 25) {
+                        width = outerRadius * Math.sin(deg);
+                    } else {
+                        width = outerRadius;
+                    }
+                    this._set('left');
+                    this._set('right', width, height);
+                } else {
+                    height = outerRadius * (1 + Math.cos(deg));
+                    if (progress < 75) {
+                        width = - outerRadius * Math.sin(deg);
+                    } else {
+                        width = outerRadius;
+                    }
+
+                    this._set('left', width, height);
+                    this._set('right', outerRadius, outerRadius * 2);
+                }
+
+                this.progress = progress;
+            },
+            increase: function (num) { this.go(this.get() + num); },
+            decrease: function (num) { this.go(this.get() - num); }
+        };
+    </script>
+
+</body>
+</html>

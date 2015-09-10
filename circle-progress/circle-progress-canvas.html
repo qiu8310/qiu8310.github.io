@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimal-ui">
+    <link rel="stylesheet" href="basic.css">
+    <script src="basic.js"></script>
+</head>
+<body>
+
+
+    <div class="circle">
+        content
+    </div>
+
+
+
+    <script>
+
+        function CircleProgress (opts) {
+            this.root = this.canvas = document.createElement('canvas');
+            this.ctx = this.canvas.getContext('2d');
+
+            this.radius = opts.radius || 60;
+            this.border = opts.border || 4;
+            this.bgColor = opts.bgColor || 'lightgray';
+            this.fgColor = opts.fgColor || 'greenyellow';
+
+            this.startAngle = (opts.startAngle || 0) - 0.5 * Math.PI;
+
+            this.center = this.radius + this.border;
+            this.size = this.center * 2;
+
+            this.canvas.style.cssText = 'position:absolute;top:0;left:0;';
+            opts.container.appendChild(this.canvas);
+            this.reset();
+        }
+
+        CircleProgress.prototype._draw = function (deg, color) {
+            var ctx = this.ctx;
+            var startAngle = this.startAngle;
+            ctx.beginPath();
+            ctx.arc(this.center, this.center, this.radius + this.border *.5, startAngle, deg * Math.PI / 180 + startAngle, false);
+            ctx.lineWidth = this.border;
+            ctx.strokeStyle = color;
+            ctx.stroke();
+        };
+        CircleProgress.prototype.reset = function () {
+            this.canvas.width = this.size;
+            this.canvas.height = this.size;
+            this.progress = 0;
+            this._draw(360, this.bgColor);
+        };
+        CircleProgress.prototype.end = function () {
+            this.go(360);
+        };
+        CircleProgress.prototype.get = function () {
+            return this.progress;
+        };
+        CircleProgress.prototype.go = function (progress) {
+            this.reset();
+            progress = parseFloat(progress);
+
+            if (isNaN(progress) || progress < 0) progress = 0;
+            if (progress > 100) progress = 100;
+
+            this.progress = progress;
+            this._draw(progress * 360 / 100, this.fgColor);
+        };
+        CircleProgress.prototype.increase = function (num) {
+            this.go(this.get() + num);
+        };
+        CircleProgress.prototype.decrease = function (num) {
+            this.go(this.get() - num);
+        };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimal-ui">
+    <link rel="stylesheet" href="basic.css">
+    <script src="basic.js"></script>
+</head>
+<body>
+
+
+    <div class="circle">
+        content
+    </div>
+
+
+
+    <script>
+        function CircleProgress(opts) {
+
+            this.radius = opts.radius || 60;
+            this.border = opts.border || 4;
+            this.bgColor = opts.bgColor || 'lightgray';
+            this.fgColor = opts.fgColor || 'greenyellow';
+            this.outerRadius = this.radius + this.border;
+
+            var root = this.root = document.createElement('div');
+            var size = this.radius * 2;
+            root.style.cssText = 'width: ' + size + 'px; ' +
+                'height: ' + size + 'px; ' +
+                'border: ' + this.border + 'px solid ' + this.fgColor + ';' +
+                'position: absolute; top: 0; left: 0; ' +
+                'border-radius: 50%;';
+            this._init();
+            opts.container.appendChild(root);
+
+            var lr = root.children;
+            this.left = lr[0];
+            this.right = lr[1];
+
+            this.reset();
+        }
+
+        CircleProgress.prototype = {
+            _init: function () {
+                var base = 'height: ' + this.radius * 2 + 'px; ' +
+                    'width: ' + this.radius  + 'px; ' +
+                    'border: ' + this.border + 'px solid ' + this.bgColor + ';' +
+                    'position: absolute; ' +
+                    'top: -' + this.border + 'px;';
+
+                var outerRadius = this.border + this.radius;
+
+                var left = 'left: -' + this.border + 'px;' +
+                    'border-right: none;' +
+                    'transform-origin: right center;' +
+                    'border-top-left-radius: ' + outerRadius + 'px;' +
+                    'border-bottom-left-radius: ' + outerRadius + 'px;';
+
+                var right = 'right: -' + this.border + 'px;' +
+                    'border-left: none;' +
+                    'transform-origin: left center;' +
+                    'z-index: 2;' +
+                    'border-top-right-radius: ' + outerRadius + 'px;' +
+                    'border-bottom-right-radius: ' + outerRadius + 'px;';
+
+                this.root.innerHTML = '<div style="' + base + left + '"></div>' +
+                    '<div style="' + base + right + '"></div>';
+            },
+            get: function () { return this.progress; },
+            end: function () { this.go(100); },
+            increase: function (num) { this.go(this.get() + num); },
+            decrease: function (num) { this.go(this.get() - num); },
+            reset: function () { this.go(0); },
+
+            go: function (progress) {
+                progress = parseFloat(progress);
+                if (isNaN(progress) || progress < 0) progress = 0;
+                if (progress > 100) progress = 100;
+
+                var deg = (progress / 100) * 360;
+
+                var leftStyle = this.left.style;
+                var rightStyle = this.right.style;
+
+                if (progress < 50) {
+                    rightStyle.borderColor = this.bgColor;
+                    rightStyle.transform = 'rotate(' + deg + 'deg)';
+                    leftStyle.transform = 'none';
+                } else {
+                    rightStyle.borderColor = this.fgColor;
+                    rightStyle.transform = 'none';
+                    leftStyle.transform = 'rotate(' + (deg - 180) + 'deg)';
+                }
+
+                this.progress = progress;
+            }
+        };
+
+    </script>
+</body>
+</html>
