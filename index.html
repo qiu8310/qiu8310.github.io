@@ -6,10 +6,35 @@
   <meta charset="UTF-8">
   <title>More's Blog</title>
   <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimal-ui">
+  <style type="text/css">
+  .titles {
+    width: 960px;
+    margin: 50px auto 0 auto;
+  }
+  .title {
+    display: block;
+    font-size: 20px;
+    line-height: 36px;
+    text-align: center;
+  }
+  @media all and (max-width: 960px) {
+    .titles {
+      width: auto;
+    }
+    .title {
+      margin-left: 30px;
+      font-size: 16px;
+      line-height: 26px;
+      text-align: left;
+    }
+  }
+  </style>
 </head>
 <body>
 
-  <a href="./circle-progress">圆形加载条的三种实现方案</a>
+  <section class="titles">
+    <a class="title" href="./articles/circle-progress/index.html">2015-09-09：圆形加载条的三种实现方案</a>
+  </section>
 
 </body>
 </html>
