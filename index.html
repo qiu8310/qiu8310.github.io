@@ -7,7 +7,7 @@
   <title>More's Blog</title>
   <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimal-ui">
   <style type="text/css">
-  .titles {
+  .articles, .helpers {
     width: 960px;
     margin: 50px auto 0 auto;
   }
@@ -15,25 +15,29 @@
     display: block;
     font-size: 20px;
     line-height: 36px;
-    text-align: center;
   }
   @media all and (max-width: 960px) {
-    .titles {
+    .articles, .helpers {
       width: auto;
     }
     .title {
       margin-left: 30px;
       font-size: 16px;
       line-height: 26px;
-      text-align: left;
     }
   }
   </style>
 </head>
 <body>
 
-  <section class="titles">
+  <section class="articles">
+    <h2>文章：</h2>
     <a class="title" href="./articles/circle-progress/index.html">2015-09-09：圆形加载条的三种实现方法</a>
+  </section>
+
+  <section class="helpers">
+    <h2>工具：</h2>
+    <a class="title" href="./helpers/keyboard-event-viewer/index.html">2016-08-11：键盘事件查看器</a>
   </section>
 
 </body>
