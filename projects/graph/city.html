@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf8">
+    <title>Graph</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+  </head>
+  <body>
+    <div class="root container">
+      <center><button class="btn btn-primary" id="nearRSU">计算最近的RSU</button></center>
+
+      <div id="stage" class="center-block">
+
+
+      </div>
+
+    </div>
+    <script src="js/lodash.js"></script>
+    <script src="js/kinetic.js"></script>
+    <script src="js/city-funcs.js"></script>
+    <script src="js/city.js"></script>
+    <script>
+      document.getElementById('nearRSU').addEventListener('click', nearRSU);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf8">
+    <title>Graph</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+  </head>
+  <body>
+    <div id="root" class="container">
+      <div id="opts" class="form-horizontal">
+
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label class="control-label col-sm-7">算法</label>
+            <div class="col-sm-5">
+              <select data-key="cars.algorithm" class="form-control">
+                <option value="gpsr">GPSR</option>
+                <option value="epidemic">Epidemic</option>
+                <!--<option value="sw">Spray-and-wait</option>-->
+                <option value="ccr">CCR随机平均</option>
+                <option value="ccr_line">线性CCR</option>
+                <option value="ccr_avg">CCR相差最大平均</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label class="control-label col-sm-7">画布宽度</label>
+            <div class="col-sm-5">
+              <input type="text" data-key="screen.width" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label class="control-label col-sm-7">画布高度</label>
+            <div class="col-sm-5">
+              <input type="text" data-key="screen.height" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label class="control-label col-sm-7">车辆数量</label>
+            <div class="col-sm-5">
+              <input type="text" data-key="cars.number" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label class="control-label col-sm-7">传输距离</label>
+            <div class="col-sm-5">
+              <input type="text" data-key="car.radius" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label class="control-label col-sm-7">隐藏外圆</label>
+            <div class="col-sm-5">
+              <select data-key="car.hide_circle" class="form-control">
+                <option value="0">否</option>
+                <option value="1">是</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label class="control-label col-sm-7">起始数据包</label>
+            <div class="col-sm-5">
+              <input type="text" data-key="car.start_packet" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label class="control-label col-sm-7">隐藏数据</label>
+            <div class="col-sm-5">
+              <select data-key="car.hide_text" class="form-control">
+                <option value="0">否</option>
+                <option value="1">是</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="control-label col-sm-3">允许的车速</label>
+            <div class="col-sm-9">
+              <input type="text" data-key="cars.velocities" class="form-control">
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+      </div>
+      <div class="clearfix"></div>
+      <div id="labels">
+
+        <label class="label label-info fps">0</label>
+        <label class="label label-info times">0</label>
+        <label class="label label-info send">0</label>
+        <label class="label label-info receive">0</label>
+        <label class="label label-info rate">0</label>
+        <label class="label label-info e2e">0</label>
+        <label class="label label-info ttl">0</label>
+
+      </div>
+
+      <div id="controls" class="row center-block">
+        <button class="btn btn-primary" onclick="init()">Reset</button>
+        <button class="btn btn-success" onclick="animation.start()">Start</button>
+        <button class="btn btn-danger" onclick="animation.stop()">Stop</button>
+      </div>
+
+      <div id="container" class="center-block">
+
+
+      </div>
+
+    </div>
+    <script src="js/config.js"></script>
+    <script src="js/lodash.js"></script>
+    <script src="js/kinetic.js"></script>
+    <script src="js/funcs.js"></script>
+    <script src="js/car.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

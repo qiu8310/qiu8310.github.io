@@ -1,0 +1,49 @@
+body {
+  padding: 10px;
+  margin: 0;
+  background: #F5F5F5;
+}
+
+
+#controls {
+  margin: 10px 0 10px;
+  text-align: center;
+}
+
+.kineticjs-content {
+  display: block !important;
+  margin: 0 auto;
+}
+
+#labels {
+  text-align: center;
+}
+#labels .fps::before {
+  content: 'FPS：';
+}
+#labels .times::before {
+  content: 'TIME：';
+}
+#labels .times::after {
+  content: 's';
+}
+
+#labels .send::before {
+  content: '发出数据：';
+}
+
+#labels .receive::before {
+  content: '接收数据：';
+}
+
+#labels .rate::before {
+  content: '数据传递率：';
+}
+
+#labels .e2e::before {
+  content: '平均端到端时延：';
+}
+
+#labels .ttl::before {
+  content: '平均路由次数：';
+}
