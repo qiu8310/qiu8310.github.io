@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--html(lang="zh" manifest="manifest.appcache")--><!--[if lt IE 10]>
+<html class="root zh ie" lang="zh">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="root zh" lang="zh">
+<!--<![endif]-->
+<head>
+  <title>个人主页</title>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimal-ui">
+  <meta name="format-detection" content="telephone=no;">
+  <meta name="format-detection" content="address=no;email=no;">
+  <meta http-equiv="cleartype" content="on">
+  <link rel="stylesheet" href="styles/app.css"><!--[if lt IE 9]>
+  <script type="text/javascript" src="http://apps.bdimg.com/libs/html5shiv/r29/html5.min.js"></script><![endif]-->
+</head>
+<!--  这里的 category 要换成具体业务线的名字，有  大沪江、词场、网校、社团、CCTalk-->
+<body data-log-category="社团" class="self"><!-- 头部开始  -->
+  <header class="header no-select">
+    <h1 class="title">个人主页</h1><a class="back text-hide">Back</a><a href="#" data-log-id="1477" class="edit text-hide hj-log">Edit</a>
+  </header><!-- 头部结束  -->
+  <!-- 主体内容开始  -->
+  <main class="main">
+    <style>table{font-size:18px;display:inline-block;margin-top:30px}table tr td:first-child{text-align:right}table a{margin-left:10px;color:#6495ed}</style><div class="user">
+      <div class="user-top">
+        <div class="user-avatar rounded"><img src="http://cdn.llsapp.com/d7f764be82c033627f43c89796cc3102c.png" class="avatar rounded"></div>
+        <div class="user-desc">
+          <!-- boy  or girl-->
+          <h2 class="name"><span class="gender girl">果小冰冰冰</span></h2>
+          <p class="bio line-clamp-2">学习成为更好的自己一二三四五六七八刀学习成为更好的自己一二三四五六七八刀</p>
+        </div>
+      </div>
+      <ul class="user-stats flex-container">
+        <li class="following stat has-new"><a href="#" data-log-id="1478" class="link hj-log">
+            <div class="count"><span class="num">8560</span></div><span class="label">关注</span></a></li>
+        <li class="followers stat"><a href="#" data-log-id="1479" class="link hj-log">
+            <div class="count"><span class="num">9838</span></div><span class="label">粉丝</span></a></li>
+        <!-- 沪龄 不可点击，不要加 a 标签（不过加了也没关系，布局不会变）-->
+        <li class="aged stat">
+          <div class="count"><span class="num">1年</span></div><span class="label">沪龄</span>
+        </li>
+      </ul>
+      <!-- 这里需要异步操作，点击完按钮后需要禁用此按钮--><a class="btn add-follow"><span class="btn-text">关注</span></a>
+      <!--a.btn.single-follow: span.btn-text 已关注-->
+      <!--a.btn.double-follow: span.btn-text 互相关注-->
+    </div>
+    <center>
+      <table>
+        <tr>
+          <td colspan="4" style="text-align:center;padding:10px 0"><b>主要页面</b></td>
+        </tr>
+        <tr>
+          <td><span>大沪江：</span></td>
+          <td><a href="hujiang.html">客人</a></td>
+          <td><a href="hujiang.html#self">本尊</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><span>CCTalk：</span></td>
+          <td><a href="cctalk.html">客人</a></td>
+          <td><a href="cctalk.html#self">本尊</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><span>网校：</span></td>
+          <td><a href="class.html">客人</a></td>
+          <td><a href="class.html#self">本尊</a></td>
+          <td><a href="empty-class.html#self">空页面</a></td>
+        </tr>
+        <tr>
+          <td><span>社团：</span></td>
+          <td><a href="league.html">客人</a></td>
+          <td><a href="league.html#self">本尊</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><span>词场：</span></td>
+          <td><a href="ci.html">客人</a></td>
+          <td><a href="ci.html#self">本尊</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><span>其它：</span></td>
+          <td><a href="empty.html">无内容</a></td>
+          <td><a href="empty-inner.html">无子模块</a></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><a href="loading.html">加载</a></td>
+          <td><a class="trigger-dialog">确认弹窗</a></td>
+          <td><a class="trigger-alert">提醒弹窗</a></td>
+        </tr>
+      </table>
+    </center>
+  </main><!-- 主体内容结束  -->
+  <!-- 尾部开始  -->
+  <footer class="footer"></footer><!-- 尾部结束  -->
+  <script src="scripts/vender.js"></script><script src="scripts/app.js"></script><script>
+    $('.trigger-dialog').on('click', (e) => dialog('真的要取消关注吗？') && e.preventDefault());
+    $('.trigger-alert').on('click', (e) => alert('对不起，您最多只能关注2000个'))
+  </script><!--include ../_stats--></body></html>

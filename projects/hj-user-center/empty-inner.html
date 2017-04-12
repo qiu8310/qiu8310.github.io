@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--html(lang="zh" manifest="manifest.appcache")--><!--[if lt IE 10]>
+<html class="root zh ie" lang="zh">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="root zh" lang="zh">
+<!--<![endif]-->
+<head>
+  <title>个人主页</title>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimal-ui">
+  <meta name="format-detection" content="telephone=no;">
+  <meta name="format-detection" content="address=no;email=no;">
+  <meta http-equiv="cleartype" content="on">
+  <link rel="stylesheet" href="styles/app.css"><!--[if lt IE 9]>
+  <script type="text/javascript" src="http://apps.bdimg.com/libs/html5shiv/r29/html5.min.js"></script><![endif]-->
+</head>
+<!--  这里的 category 要换成具体业务线的名字，有  大沪江、词场、网校、社团、CCTalk-->
+<body data-log-category="社团" class="self"><!-- 头部开始  -->
+  <header class="header no-select">
+    <h1 class="title">个人主页</h1><a class="back text-hide">Back</a><a href="#" data-log-id="1477" class="edit text-hide hj-log">Edit</a>
+  </header><!-- 头部结束  -->
+  <!-- 主体内容开始  -->
+  <main class="main">
+    <div class="user">
+      <div class="user-top">
+        <div class="user-avatar rounded"><img src="http://cdn.llsapp.com/d7f764be82c033627f43c89796cc3102c.png" class="avatar rounded"></div>
+        <div class="user-desc">
+          <!-- boy  or girl-->
+          <h2 class="name"><span class="gender girl">果小冰冰冰</span></h2>
+          <p class="bio line-clamp-2">学习成为更好的自己一二三四五六七八刀学习成为更好的自己一二三四五六七八刀</p>
+        </div>
+      </div>
+      <ul class="user-stats flex-container">
+        <li class="following stat has-new"><a href="#" data-log-id="1478" class="link hj-log">
+            <div class="count"><span class="num">8560</span></div><span class="label">关注</span></a></li>
+        <li class="followers stat"><a href="#" data-log-id="1479" class="link hj-log">
+            <div class="count"><span class="num">9838</span></div><span class="label">粉丝</span></a></li>
+        <!-- 沪龄 不可点击，不要加 a 标签（不过加了也没关系，布局不会变）-->
+        <li class="aged stat">
+          <div class="count"><span class="num">1年</span></div><span class="label">沪龄</span>
+        </li>
+      </ul>
+      <!-- 这里需要异步操作，点击完按钮后需要禁用此按钮--><a class="btn add-follow"><span class="btn-text">关注</span></a>
+      <!--a.btn.single-follow: span.btn-text 已关注-->
+      <!--a.btn.double-follow: span.btn-text 互相关注-->
+    </div>
+    <div class="empty inner">Ta还没在词场背单词哦~</div>
+    <!-- 自己查看自己的主页时，不需要此模块-->
+    <ul class="other-platforms">
+      <li class="platform"><a href="#" class="link">
+          <p class="label">正在学习的网校课程</p>
+          <h4 class="title">5步炼成500强职场英语5步炼成500强职场英语5步炼成500强职场英语5步炼成500强职场英语[移动体验班]</h4></a></li>
+      <li class="platform"><a href="#" class="link">
+          <p class="label">正在背的词书</p>
+          <h4 class="title">学英语绕不过的1000词</h4></a></li>
+      <li class="platform"><a href="#" class="link">
+          <p class="label">最近活跃的帖子</p>
+          <h4 class="title">史上最帅大猩猩，据说日本菇凉都迷上了~</h4></a></li>
+      <li class="platform"><a href="#" class="link">
+          <p class="label">最近听过的CC课程</p>
+          <h4 class="title">雅思写作提分三步曲—沪江雅思</h4></a></li>
+    </ul>
+  </main><!-- 主体内容结束  -->
+  <!-- 尾部开始  -->
+  <footer class="footer"></footer><!-- 尾部结束  -->
+  <script src="scripts/vender.js"></script><script src="scripts/app.js"></script><!--include ../_stats--></body></html>

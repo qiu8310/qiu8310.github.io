@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 10]>
+<html class="root zh ie no-js" lang="zh">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="root zh no-js" lang="zh">
+<!--<![endif]-->
+<head>
+  <title>个人中心</title>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="qiuzhonglei@hujiang.com">
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+  <meta name="full-screen" content="yes">
+  <meta name="screen-orientation" content="portrait">
+  <meta name="browsermode" content="application">
+  <meta name="x5-orientation" content="portrait">
+  <meta name="x5-fullscreen" content="true">
+  <meta name="x5-page-mode" content="app">
+
+  <!-- windows phone 点击无高光 -->
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no;">
+  <meta name="format-detection" content="address=no;email=no;">
+  <meta http-equiv="cleartype" content="on">
+
+  <!--
+  <script type='text/javascript'>window.BWEUM||(BWEUM={});BWEUM.info = {"stand":true,"agentType":"browser","agent":"bi-collector.oneapm.com/static/js/bw-send-411.4.5.js","beaconUrl":"bi-collector.oneapm.com/beacon","licenseKey":"2RZ7m~fE7JjZ377A","applicationID":2275234};</script><script type="text/javascript" src="//bi-collector.oneapm.com/static/js/bw-loader-411.4.5.js"></script>
+  -->
+
+  <script src="http://7u2rjq.com1.z0.glb.clouddn.com/co/as/head-8a197b539fbc01cd.js"></script>
+  <link rel="stylesheet" href="http://7u2rjq.com1.z0.glb.clouddn.com/co/as/app-edcb7d77c5e6812c.css">
+
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="http://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script type="text/javascript" src="http://cdn.staticfile.org/es5-shim/4.3.1/es5-shim.min.js"></script>
+  <![endif]-->
+
+  <!--[if lt IE 10]>
+  <script type="text/javascript" src="http://cdn.staticfile.org/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+
+  <div class="main">
+    <router-view></router-view>
+  </div>
+
+  <script>
+  var G = {
+    root: '/hujiang/account/',
+    hashbang: true,
+    signOutBase: 'https://qapass.hujiang.com/logout/?url=',
+    syncHost: "https://qapass.",
+    syncRemeberDays: 14,
+    syncDomains: eval('(["hujiang.com","hjclass.com","hjenglish.com","cctalk.com","yeshj.com"])')
+  };
+  </script>
+  <script src="http://7u2rjq.com1.z0.glb.clouddn.com/co/as/vendors-cee334e1a3301398.js"></script>
+  <script>
+    FastClick.attach(document.body),Promise.prototype["finally"]=function(t){var n=this.constructor;return this.then(function(r){return n.resolve(t()).then(function(){return r})},function(r){return n.resolve(t()).then(function(){throw r})})};
+  </script>
+  <script src="http://7u2rjq.com1.z0.glb.clouddn.com/co/as/app-be4717d9b08cb097.js"></script>
+
+</body>
+</html>
