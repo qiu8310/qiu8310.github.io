@@ -1,0 +1,277 @@
+<!DOCTYPE html> 
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+	<title>BPMN</title>
+	<link rel="stylesheet" href="css/basic.css">
+	<link rel="stylesheet" href="css/ui.css">
+	<link rel="stylesheet" media="screen" type="text/css" href="vendor/colorpicker/css/colorpicker.css" />
+	<!--[if lt IE 9]> 
+		<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script> 
+	<![endif]--> 
+	<!--[if IE]><script type="text/javascript" src="vendor/excanvas.js"></script><![endif]-->
+</head>
+
+<body>
+
+
+	<div id='container'>
+		<div id='viewport'>
+			<div id="view" style="position: absolute; cursor: default; width: 1200px; height: 800px; ">
+				<div id="stage" style="overflow-x: visible; overflow-y: visible; width: 1150px; height: 760px; position: absolute; left: 80px; top: 20px; " class="page">
+
+				</div>
+			</div>
+		</div>
+
+		<div id='document_bar' class='title-bar'>
+			<h1>Untitled Document</h1>
+
+			<!--
+			<div class="sign-wrap">
+				<div class="sign-bar">
+					<div class="sign" style="">登入</div>
+				</div>
+			</div>
+			-->
+		</div>
+
+		<div id='page_bar' class='tab-bar'>
+			<div class="slide-track">
+				<div class="tabs" >
+					<ul class='ui-sortable'>
+						
+					</ul>
+				</div>
+			</div>
+
+
+<div class="controls"><div class="divider"></div><div class="icon-button left inverse" title="New Page"><div class="icon-13 icon-13-plus"></div></div><div class="divider"></div><div class="icon-button left inverse disabled"><div class="icon-13 icon-13-tri-dbl-l"></div></div><div class="icon-button left inverse disabled"><div class="icon-13 icon-13-tri-l"></div></div><div class="icon-button left inverse disabled"><div class="icon-13 icon-13-tri-r"></div></div><div class="icon-button left inverse disabled"><div class="icon-13 icon-13-tri-dbl-r"></div></div><div class="divider"></div><div class="icon-button left inverse"><div class="icon-13 icon-13-tri-d"></div></div></div>
+
+
+		</div>
+
+
+		<div id='tool_box_wrap'>
+			<div class='handle'></div>
+			<div id='tool_box' style='font-size: 0.6em'>
+			</div>
+		</div>
+
+		<div id='option_wrap'>
+			<div class='options'>
+			<form id='options'>
+			</form>
+			</div>
+		</div>
+
+	</div>
+	<div id="menu" style="display:none;">
+	</div>
+	<div id="menu-container" class='menu-container'>
+		
+	</div>
+	<div id="dialog-container" style='background-color:rgba(0, 0, 0, 0.3); bottom: 0; right: 0; display: none;'>
+
+		<div class="dialog non-ajax ui-draggable prompt" style="position: absolute; display: none; "><div class="dialog-wrapper"><div class="dialog-header"><span class='dialog-title'>BPMN Dialog</span><div class="icon-13-button"><div class="icon-13 icon-13-close"></div></div></div><div class="dialog-body" style="max-height: 386px; "><div ><span class='dialog-message'>Enter a new title for this page</span><div class="spacer"></div><div class="input-text"><div class="input-text-textbox"><input type="text" class='dialog-input'></div></div></div></div><div class="dialog-footer"><div class="buttons"><div class="button">Cancel</div><div class="button ok highlight">OK</div></div><div class="clear"></div></div></div></div>
+
+		<div class="dialog non-ajax ui-draggable confirm" style="position: absolute; display: none;"><div class="dialog-wrapper"><div class="dialog-header"><span class='dialog-title'>BPMN Dialog</span><div class="icon-13-button"><div class="icon-13 icon-13-close"></div></div></div><div class="dialog-body" style="max-height: 386px; "><span  class='dialog-message'>Are you sure you want to delete this page?</span></div><div class="dialog-footer"><div class="buttons"><div class="button">Cancel</div><div class="button highlight ok">OK</div></div><div class="clear"></div></div></div></div>
+
+		<div class="dialog non-ajax ui-draggable login" style="position: absolute; display: none; ">
+			<div class="dialog-wrapper">
+				<form>
+					<div class="dialog-header"><span class='dialog-title'>登录</span><div class="icon-13-button"><div class="icon-13 icon-13-close"></div></div></div>
+					<div class="dialog-body" style="max-height: 386px; ">
+					
+						<div style="padding-left: 60px;">
+							用户名：<input type="text" name='user' class='dialog-input'/>
+						</div>
+						<div style="padding-left: 60px;">
+							密　码：<input type="text" name='password' class='dialog-input'/>
+						</div>
+					
+					</div>
+					<div class="dialog-footer"><div class="buttons"><div class="button">Cancel</div><div class="button highlight ok">OK</div></div><div class="clear"></div></div>
+				</form>
+			</div>
+		</div>
+
+	</div>
+	<div id="toppest"></div>
+
+</body>
+<script src='js/extend.js'></script>
+<script src='vendor/jquery.js'></script>
+<script src="vendor/colorpicker/js/colorpicker.js"></script>
+<script src='js/config.js'></script>
+<script src='js/basic.js'></script>
+<script src='js/ui.js'></script>
+<script src='js/comp.js'></script>
+<script src='js/manage.js'></script>
+<script src='js/command.js'></script>
+<script src="./vendor/sockjs-0.3.js"></script>
+<script src='js/sockmsg.js'></script>
+<script src='js/saver.js'></script>
+<script type="text/javascript">
+
+"use strict";
+/* 提前加载图片 */
+(function(){
+	var img, imgs = C('preLoadImgs');
+	var i=imgs.length;
+	while(i--){
+		img = new Image();
+		img.src = 'image/' + imgs[i];
+	}
+})();
+
+
+var query = {};
+location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+	query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+} );
+
+
+
+/* 绘制组件小图 */
+function makeIcon(comp, canvas, width, height){
+	var ctx, ctxStyle;
+	try{
+		canvas = G_vmlCanvasManager.initElement(canvas);
+	}catch(e){}
+	ctx = canvas.getContext('2d');
+
+	ctxStyle = extend({},C('contextStyle'), comp['contextStyle'], extend.OVERRIDE_ADD);
+
+	var rate,size,w,h,gap,offsetX, offsetY, type = comp['type'] || 'rect';
+	size = C('shapeSize.'+type);
+	w = comp['width'] || size['width'];
+	h = comp['height'] || size['height'];
+	
+
+	gap = ctxStyle.lineWidth || 1;
+	width -= 2*gap; height -= 2*gap; // 防止小图标画到边框上去了
+
+	rate = min(width/w, height/h);
+
+	offsetX = 0.5*(width-w*rate) + gap;
+	offsetY = 0.5*(height-h*rate) + gap;
+	var func = comp['iconFunc'] || comp['drawFunc'];
+	Draw.execute(func, ctx, {
+		offsetX: offsetX,
+		offsetY: offsetY,
+		contextStyle: ctxStyle,
+		width: w,
+		height: h,
+		zoom: {x:rate, y:rate}
+	});
+}
+
+/*  通过循环遍历 Library ,画出左侧的工具栏  */
+(function(id){
+	if(id){
+		var wrap = document.getElementById(id), width=28, height=28;
+
+		var cataTitle, cata, cataContent, compName, comp, compContent, canvas, name;
+
+		for(cata in Library){
+			if(cata === '_inner_') continue;
+			cataTitle = document.createElement('h3');
+			cataTitle.innerHTML = '<a href="#">' + cata + '</a>';
+			cataContent = document.createElement('div');
+			cataContent.className = 'content';
+
+			wrap.appendChild(cataTitle);
+			wrap.appendChild(cataContent);
+
+			if(Library[cata]){
+				for(compName in Library[cata]){
+					comp = Library[cata][compName];
+					if(comp['drawFunc']){
+						name = cata+'.'+compName;
+						compContent = make('div', 0, 0, width, height, 'relative');
+						compContent.setAttribute('shape', name);
+						//compContent.setAttribute('draggable', true);
+						canvas = make('canvas', 0, 0, width, height, 'relative');
+						compContent.appendChild(canvas);
+						cataContent.appendChild(compContent);
+						makeIcon(comp, canvas, width, height);
+					}
+				}
+			}
+		}
+
+		var $wrap = $(wrap), x, y, shape,
+			stage = Stage.getInstance(),
+			$toppest = $('#toppest'),
+			$icons = $('.content>div', $wrap );
+
+		// 拖放组件
+		$wrap.delegate('.content>div', 'mousedown.shapeicon', function(e){
+			var shapename = $(this).attr('shape');
+			shape = new Shape({drawFuncName: shapename});
+			shape.x = x-shape.getWidth()*0.5;
+			shape.y = y-shape.getHeight()*0.5;
+			shape.draw();
+			$toppest.append(shape.getContent());
+			
+			e.preventDefault();	e.stopPropagation();
+		});
+		$(document).on('mousemove.shapeicon', function(e){
+			if(shape){
+				shape.move(e.clientX, e.clientY, x, y).draw();	
+			}
+			x = e.clientX;	y = e.clientY;
+		}).on('mouseup.shapeicon', function(e){
+			if(shape){
+				var p = stage.getStageXY(e);
+				shape.x = p.x - shape.getWidth()*0.5;
+				shape.y = p.y - shape.getHeight()*0.5;
+				if(p.x > 0 && p.y > 0 && p.x < StageRange.width && p.y<StageRange.height )
+					stage.add(shape);
+			}
+			$toppest.empty();
+			shape = null;
+		});
+
+	}
+
+})('tool_box')
+
+
+
+/*
+var s = Stage.getInstance();
+
+var m1 = new Shape({
+	drawFuncName: 'Tasks.Task',
+	x: 200,
+	y: 10,
+	text: 'Tasks.MultipleInstanceSequenceTask',
+	contextStyle: {
+		fillStyle: '#FF0000'
+	},
+});
+
+
+var t = new Text(
+	{x: 400, y: 100}
+);
+
+//s.add(m1);
+//s.add(t);
+m1.draw();
+*/
+
+</script>
+<script type='text/javascript'>
+/*
+(function (d, t) {
+  var bh = d.createElement(t), s = d.getElementsByTagName(t)[0];
+  bh.type = 'text/javascript';
+  bh.src = '//www.bugherd.com/sidebarv2.js?apikey=wexwy6i4i7xnzrq1pckvhw';
+  s.parentNode.insertBefore(bh, s);
+  })(document, 'script');
+*/
+</script>
+</html>

@@ -1,0 +1,631 @@
+<!DOCTYPE html> 
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+	<title>BPMN</title>
+	<link rel="stylesheet" href="css/basic.css">
+	<link rel="stylesheet" href="css/ui.css">
+	<link rel="stylesheet" media="screen" type="text/css" href="vendor/colorpicker/css/colorpicker.css" />
+	<!--[if lt IE 9]> 
+		<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script> 
+	<![endif]--> 
+	<!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
+</head>
+
+<body>
+
+	<div id='container'>
+		<div id='viewport'>
+			<div id="view" style="position: absolute; cursor: default; width: 1200px; height: 800px; ">
+				<div id="stage" style="overflow-x: visible; overflow-y: visible; width: 1000px; height: 580px; position: absolute; left: 80px; top: 20px; " class="page">
+
+				</div>
+			</div>
+		</div>
+
+		<div id='document_bar'>
+			<h1>BPMN Design</h1>
+		</div>
+
+		<div id='page_bar'>
+			<div class="slide-track">
+				<div class="tabs" >
+					<ul>
+						<li class="selected" >
+							<div class="body">
+								<span>ComponentStruct ComponentStruct</span>
+							</div>
+							<div class="l-end"><div></div></div>
+							<div class="r-end"><div></div></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="controls">
+				<div class="divider"></div>
+				<div class="icon-button left inverse" title="New Page">
+					<div class="icon-13 icon-13-plus"></div>
+				</div>
+				<div class="divider"></div>
+			</div>
+		</div>
+
+		<div id='save_bar'>
+			<input type='button' value='newfile' name='newfile' id='newfile'/>
+			<input type='button' value='save' name='save' id='save'/>
+			<select id='files' style="min-width: 90px; max-width: 200px;">
+			</select>
+			<input type='button' value='del' name='del' id='del'/>
+		</div>
+
+		<div id='tool_box_wrap'>
+			<div class='handle'></div>
+			<div id='tool_box' style='font-size: 0.6em'>
+			</div>
+		</div>
+
+		<div id='option_wrap'>
+			<div class='options'>
+			<form id='options'>
+			
+				<div class="option-bar-label-left">Text:</div>
+				<div class='option'>
+					<div id='textcolor' class='colorpick ' >
+						<div class="color"></div>
+						<div class="mask"></div>
+					</div>
+				</div>
+				
+				<div class="option-bar-divider"><div class="ld"></div><div class="rd"></div></div>
+				<div class="option-bar-label-left">Line:</div>
+			
+				<div class='option'>
+					<!-- 线条粗细 -->
+					<div class='spinner' id='strokesize'></div>
+				</div>
+
+				<div class='option'>
+					<!-- 线条颜色 -->
+					<div id='strokecolor' class='colorpick ' >
+						<div class="color"></div>
+						<div class="mask"></div>
+					</div>
+				</div>
+				
+				<div class='option'>
+					<!-- 点虚直线条 -->
+					<div class="select" id="linetype" style="width: 54px;">
+						<div class="select-wrapper">
+							<div class="select-content">
+								<div class="icon-13 icon-13-line-style-solid-lg"></div>
+							</div>
+							<div class="select-button">
+								<div class="icon-13 icon-13-select-arrows">
+								</div>
+							</div>
+						</div>
+
+
+						<div class="menu small" style="display: none; z-index: 100;" >
+							<div class="menu-body" style="height: auto;">
+								<div class="menuitem selected" option-value="normal">
+									<div class="menuitem-content">
+										<div><div class="icon-13 icon-13-line-style-solid-lg"></div></div>
+									</div>
+								</div>
+								<div class="menuitem" option-value="dash">
+									<div class="menuitem-content">
+										<div><div class="icon-13 icon-13-line-style-dashed-lg"></div></div>
+									</div>
+								</div>
+								<div class="menuitem" option-value="dot">
+									<div class="menuitem-content">
+										<div><div class="icon-13 icon-13-line-style-dotted-lg"></div></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="option-bar-divider"><div class="ld"></div><div class="rd"></div></div>
+				<div class='option'>
+					<!-- 线条类型 -->
+					<div class="button-bar" id="linekind">
+						<div class="button-bar-item"  option-value="bend">
+							<div class="icon-13 icon-13-line-shape-straight"></div>
+						</div>
+						<div class="button-bar-item" option-value="straight">
+							<div class="icon-13 icon-13-line-shape-direct"></div>
+						</div>
+					</div>
+				</div>
+				
+				<div class='option'>
+					<!-- 线条起始形状 -->
+					<div class="select" id='startarrow' style="width: 35px;">
+						<div class="select-wrapper">
+							<div class="select-content">
+								<div class="icon-13 icon-13-arrow-start-solid"></div>
+							</div>
+							<div class="select-button">
+								<div class="icon-13 icon-13-select-arrows">
+								</div>
+							</div>
+						</div>
+						<div class="menu small" style="display: none;" >
+							<div class="menu-body" style="height: auto;">
+								<div class="menuitem" option-value="0">
+									<div class="menuitem-content">
+										<div><div class="icon-13 icon-13-arrow-start-none"></div></div>
+									</div>
+								</div>
+								<div class="menuitem selected" option-value="3">
+									<div class="menuitem-content">
+										<div><div class="icon-13 icon-13-arrow-start-solid"></div></div>
+									</div>
+								</div>
+								<div class="menuitem" option-value="2">
+									<div class="menuitem-content">
+										<div><div class="icon-13 icon-13-arrow-start-hollow"></div></div>
+									</div>
+								</div>
+								<div class="menuitem" option-value="1">
+									<div class="menuitem-content">
+										<div><div class="icon-13 icon-13-arrow-start-line"></div></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class='option'>
+					<!-- 线条结束形状 -->
+					<div class="select" id='endarrow'  style="width: 35px;">
+						<div class="select-wrapper">
+							<div class="select-content">
+								<div class="icon-13 icon-13-arrow-end-solid"></div>
+							</div>
+							<div class="select-button">
+								<div class="icon-13 icon-13-select-arrows">
+								</div>
+							</div>
+						</div>
+						<div class="menu small" style="display: none;" >
+							<div class="menu-body" style="height: auto;">
+								<div class="menuitem" option-value="0">
+									<div class="menuitem-content">
+										<div><div class="icon-13 icon-13-arrow-end-none"></div></div>
+									</div>
+								</div>
+								<div class="menuitem selected" option-value="3">
+									<div class="menuitem-content">
+										<div><div class="icon-13 icon-13-arrow-end-solid"></div></div>
+									</div>
+								</div>
+								<div class="menuitem" option-value="2">
+									<div class="menuitem-content">
+										<div><div class="icon-13 icon-13-arrow-end-hollow"></div></div>
+									</div>
+								</div>
+								<div class="menuitem" option-value="1">
+									<div class="menuitem-content">
+										<div><div class="icon-13 icon-13-arrow-end-line"></div></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="option-bar-divider"><div class="ld"></div><div class="rd"></div></div>
+				<div class="option-bar-label-left">Fill:</div>
+				<div class='option'>
+					<div id='fillcolor' class='colorpick ' >
+						<div class="color"></div>
+						<div class="mask"></div>
+					</div>
+				</div>
+
+			</form>
+			</div>
+		</div>
+
+	</div>
+	<div id="menu" style="display:none;">
+	</div>
+	<div id="menu-container"></div>
+
+</body>
+<script src='js/jquery.js'></script>
+<script type="text/javascript" src="vendor/colorpicker/js/colorpicker.js"></script>
+<script src='js/config.js'></script>
+<script src='js/basic.js'></script>
+<script src='js/ui.js'></script>
+<script src='js/comp.js'></script>
+<script src='js/manage.js'></script>
+<script type="text/javascript">
+
+/* 提前加载图片 */
+(function(){
+	var img, imgs = C('preLoadImgs');
+	var i=imgs.length;
+	while(i--){
+		img = new Image();
+		img.src = 'image/' + imgs[i];
+	}
+})();
+
+
+
+$('.spinner').spinner();
+$('.button-bar').radiobutton();
+$('.select').selectbar();
+$('.colorpick').colorpicker();
+
+/* 保存有关 */
+(function(){
+var save = id('save'),
+	newfile = id('newfile'),
+	title = id('title'),
+	files = id('files'),
+	stage=Stage.getInstance();
+
+function getTitle(){ return title.innerHTML; }
+function setTitle(t){ title.innerHTML = t; }
+function newOption(value, selected){
+	var option = document.createElement('option');
+	option.text = value;
+	option.value = value;
+	if(selected===true){
+		 option.selected = true;
+	}
+	files.appendChild(option);
+}
+
+/* 得到所有保存的文件 */
+if(window['localStorage']){
+	var key, loc = window.localStorage;
+	for(key in loc){
+		newOption(key);
+	}
+
+	if(key){
+		// 恢复最后一个文件
+		var data = JSON.parse(localStorage[key]);
+		stage.recover(data);
+		files.value = key;
+		setTitle(key);
+	}else{
+		newOption('Untitled', true);
+	}
+}
+
+
+/*  恢复文件  */
+bindEvent(files, 'change', function(e){
+	if(getTitle() === 'Untitled'){
+		clean();
+	}else{
+		var str, data = stage.save();
+		str = JSON.stringify(data);
+		localStorage[getTitle()] = str;
+	}
+
+	var file = files.value;
+	if(localStorage[file] !== undefined ){
+		var data = JSON.parse(localStorage[file]);
+		stage.recover(data);
+		setTitle(file);
+	}
+})
+
+/*  删除文件  */
+bindEvent(id('del'), 'click', function(e){
+	var name = getTitle();
+	if(name != 'Untitled'){
+		if(localStorage[name]){
+			localStorage[name] = null;
+			delete localStorage[name];
+		}
+	}
+	clean(name);
+
+	if(files.length>0){
+		var file = files[0]['value'];
+		var data = JSON.parse(localStorage[file]);
+		stage.recover(data);
+		setTitle(file);
+		files.value = file;
+	}
+	
+	if(files.length === 0){
+		stage.cleanAll();
+		newOption('Untitled', true);
+		setTitle('Untitled');
+	}
+})
+
+
+
+/*  新建文件  */
+bindEvent(newfile, 'click', function(e){
+	//提示保存当前文件
+	if(getTitle() === 'Untitled'){
+		var c = confirm('文件还未保存，是否保存');
+		if(c===true) saveCurrent();
+		else cleanCurrent();
+
+	//已命名的文件默认保存
+	}else{
+		var str, data = stage.save();
+		str = JSON.stringify(data);
+		localStorage[getTitle()] = str;
+	}
+	stage.cleanAll();
+	setTitle('Untitled');
+	newOption('Untitled', true);
+})
+
+
+function cleanCurrent(){
+	files.removeChild(files[files.selectedIndex]);
+}
+function clean(file){
+	for(var i=0, l=files.length; i<l; ++i){
+		if(file && files[i].text == file) files.removeChild(files[i]);
+		else if(files[i].text == 'Untitled') files.removeChild(files[i]);
+	}
+}
+
+function saveCurrent(){
+	if( !('localStorage' in window) || window['localStorage'] === null ){
+		alert('你的浏览器不支持保存文件');
+		return ;
+	}
+	var name = getTitle(), replace;
+	while( name === 'Untitled'){
+		name = prompt('请输入保存名', 'Untitled');
+		if(name){
+
+			if(localStorage[name] ){
+				replace = confirm('文件名已经存在，是否替换');
+				if(replace === false) name='Untitled';
+			}
+		}else{
+			// 不保存文件
+			return;
+		}
+	}
+
+
+	var str, data = stage.save();
+	str = JSON.stringify(data);
+	localStorage[name] = str;
+	setTitle(name)
+	/* 新加一个option到files select 上，并显示此项  */
+	if(replace !== true){
+		var option = files[files.selectedIndex];
+		option.text = name;
+		option.value = name;
+	}else{
+		files.value = name;
+		clean();
+	}
+
+}
+
+/*  保存文件  */
+bindEvent(save, 'click', saveCurrent );
+
+})();
+
+
+
+
+function makeIcon(comp, canvas, width, height){
+	var ctx, ctxStyle;
+	try{
+		canvas = G_vmlCanvasManager.initElement(canvas);
+	}catch(e){}
+	ctx = canvas.getContext('2d');
+
+	ctxStyle = extend({},C('contextStyle'), comp['contextStyle'], extend.OVERRIDE_ADD);
+
+	var rate,size,w,h,gap,offsetX, offsetY, type = comp['type'] || 'rect';
+	size = C('shapeSize.'+type);
+	w = comp['width'] || size['width'];
+	h = comp['height'] || size['height'];
+	
+
+	gap = ctxStyle.lineWidth || 1;
+	width -= 2*gap; height -= 2*gap; // 防止小图标画到边框上去了
+
+	rate = min(width/w, height/h);
+
+	offsetX = 0.5*(width-w*rate) + gap;
+	offsetY = 0.5*(height-h*rate) + gap;
+	var func = comp['iconFunc'] || comp['drawFunc'];
+	Draw.execute(func, ctx, {
+		offsetX: offsetX,
+		offsetY: offsetY,
+		contextStyle: ctxStyle,
+		width: w,
+		height: h,
+		zoom: {x:rate, y:rate}
+	});
+
+}
+
+
+
+/*  通过循环遍历 Library ,画出左侧的工具栏  */
+(function(id){
+	if(id){
+		var wrap = document.getElementById(id), width=28, height=28;
+			
+		var cataTitle, cata, cataContent, compName, comp, compContent, canvas;
+
+		for(cata in Library){
+			if(cata === '_inner_') continue;
+			cataTitle = document.createElement('h3');
+			cataTitle.innerHTML = '<a href="#">' + cata + '</a>';
+			cataContent = document.createElement('div');
+			cataContent.className = 'content';
+
+			wrap.appendChild(cataTitle);
+			wrap.appendChild(cataContent);
+
+			if(Library[cata]){
+				for(compName in Library[cata]){
+					comp = Library[cata][compName];
+					if(comp['drawFunc']){
+						name = cata+'.'+compName;
+						compContent = make('div', 0, 0, width, height, 'relative');
+						compContent.setAttribute('shape', name);
+						compContent.setAttribute('draggable', true);
+						canvas = make('canvas', 0, 0, width, height, 'relative');
+						compContent.appendChild(canvas);
+						cataContent.appendChild(compContent);
+						makeIcon(comp, canvas, width, height);
+					}
+				}
+			}
+			
+		}
+
+
+		var icon,icons;
+
+		icons = wrap.querySelectorAll('.content>div');
+
+		/**
+		 *	使工具栏可以拖放
+		 */
+		// drag start
+		bindEvent(icons, 'dragstart', function(e){
+			var data = e.dataTransfer,
+		    	shape = this.getAttribute("shape");
+			data.setData("shape", shape); 
+			return true;
+		});
+
+		// drop on target
+		var target = document.getElementById('stage-mask');
+		bindEvent(target, 'drop', function(e){
+			var data = e.dataTransfer,
+				shape = data.getData('shape');
+			// 添加组件到stage上
+			var stage = Stage.getInstance(),
+				p = stage.getStageXY(e),
+				comp = new Shape({
+					drawFuncName: shape,
+					x: p.x,
+					y: p.y
+				});
+			//修正坐标， 上面的x,y是左上角，将它放到组件中心去
+			comp.x = comp.x-comp.getWidth()*0.5;
+			comp.y = comp.y-comp.getHeight()*0.5;
+			stage.add(comp);
+			
+			return false;
+		});
+
+		// drag over
+		bindEvent(target, 'dragover', function(e){
+			e.preventDefault();
+			return false;
+		});
+
+		// drag enter
+		bindEvent(target, 'dragenter', function(e){
+			e.preventDefault();
+			return false;
+		});
+		
+		// drag leave
+		bindEvent(target, 'dragleave', function(e){
+			e.preventDefault();
+			return false;
+		});
+
+		// drag start
+		bindEvent(icons, 'dragend', function(e){
+			e.preventDefault();
+			return false;
+		});
+	}
+
+})('tool_box')
+
+
+
+
+
+/*
+var s = Stage.getInstance();
+
+var m1 = new Shape({
+	drawFuncName: 'Tasks.Task',
+	x: 200,
+	y: 10,
+	text: 'Tasks.MultipleInstanceSequenceTask',
+	contextStyle: {
+		fillStyle: '#FF0000'
+	},
+});
+
+var m2 = new Shape({
+	drawFuncName: 'Tasks.MultipleInstanceParallelTask',
+
+	//zoom: {x: 2, y: 1},
+	x: 150,
+	y: 100,
+	text: 'Multiple Task',
+	contextStyle: {
+		fillStyle: '#00FF00'
+	},
+	//rotateRadian: PI/6,
+});
+var m3 = new Shape({
+	drawFuncName: 'Tasks.LoopTask',
+	text: 'Tasks.Multipsk',
+	//zoom: {x: 0.5, y: 1},
+	//visible: false,
+	//width :300,
+	//height : 100,
+	contextStyle: {
+		fillStyle: '#0000FF'
+	},
+});
+//m3.setChosed(true);
+var m4 = new Shape({
+	drawFuncName: 'Tasks.MultipleInstanceSequenceTask',
+	//frozen: true,
+	//zoom: {x: 0.5, y: 1},
+	x: 400,
+	y: 300,
+	//width :300,
+	//height : 100,
+	contextStyle: {
+		fillStyle: '#CCCCCC'
+	},
+});
+
+var t = new Text(
+	{x: 400, y: 100}
+);
+
+s.add(m1);
+s.add(m2);
+s.add(m3);
+s.add(m4);
+s.add(t);
+*/
+
+
+</script>
+
+</html>

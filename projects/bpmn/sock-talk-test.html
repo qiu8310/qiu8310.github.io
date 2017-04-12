@@ -1,0 +1,96 @@
+<!DOCTYPE html> 
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+	<title>Test</title>
+<style>
+
+</style>
+
+</head>
+<body>
+
+	<div id='container'>
+		
+	</div>
+
+</body>
+<script src="./vendor/sockjs-0.3.js"></script>
+<script src="./vendor/jquery.js"></script>
+<script src='js/config.js'></script>
+<script src='js/sockmsg.js'></script>
+<script type="text/javascript">
+
+"use strict"
+
+
+
+
+
+var sock = new SockJS('http://localhost:'+C('port')+'/websocket', {debug: true, devel: true});
+// notice: sock.onopen, sock.onerror, sock.onclose, sock.onmessage should not be defined after sockmsg initialed
+// after all, you don't need use it
+
+
+
+socktalk.init({sock: sock, group: 12345})
+
+socktalk.onsockopen(function(e){
+	//sockmsg.send('qiu', 'abc', function(d){ 
+		//console.log(d) 
+	//});
+	//console.log('onsockopen', e)
+})
+
+
+socktalk.sendToGroup('all', 'attention, I have news for you all');
+socktalk.on('all', function(d){
+	console.log('get group message: ' + d)
+})
+
+var root = this;
+
+socktalk.send('qiu', 'even not open the connection', function(d){ console.log(d) } );
+socktalk.sendToBuffer('qiu', 'abc', function(d){ console.log(d) } );
+socktalk.sendToBuffer('qiu', 'def', function(d){ console.log(d) } );
+
+socktalk.on('bug', function(d){
+	return 'yes, I know it now, thank you!';
+})
+
+setTimeout(function(){
+
+ 	socktalk.sendBuffer( function(buffers){
+ 		for(var i=0,l=buffers.length; i<l; ++i){
+ 			if(buffers[i]['data'] == 'abc' ) buffers[i]['data'] = 'your data are hacked'
+ 		}
+ 	} );
+
+}, 1000);
+
+
+
+
+
+/*
+sock.onopen = function(e) {
+	console.log('open');
+};
+sock.onmessage = function(e) {
+
+  console.log(e.data);
+};
+sock.onclose = function(e) {
+	console.log('close');
+};
+
+sock.onerror = function(e){
+	console.log('error');
+}
+
+*/
+
+</script>
+</html>   
+
+
