@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--[if lt IE 10]>
 <html class="root zh ie no-js" lang="zh">
@@ -5,7 +6,6 @@
 <!--[if gt IE 9]><!-->
 <html class="root zh no-js" lang="zh">
 <!--<![endif]-->
-
 <head>
   <title>个人中心</title>
   <meta charset="utf-8">
@@ -36,28 +36,18 @@
   <script type='text/javascript'>window.BWEUM||(BWEUM={});BWEUM.info = {"stand":true,"agentType":"browser","agent":"bi-collector.oneapm.com/static/js/bw-send-411.4.5.js","beaconUrl":"bi-collector.oneapm.com/beacon","licenseKey":"2RZ7m~fE7JjZ377A","applicationID":2275234};</script><script type="text/javascript" src="//bi-collector.oneapm.com/static/js/bw-loader-411.4.5.js"></script>
   -->
 
+  <script src="http://7u2rjq.com1.z0.glb.clouddn.com/co/as/head-8a197b539fbc01cd.js"></script>
+  <link rel="stylesheet" href="http://7u2rjq.com1.z0.glb.clouddn.com/co/as/app-edcb7d77c5e6812c.css">
 
-  <link rel="stylesheet" href="./app-b1cd9bf0a5117724.css">
-  <script>
-    var G = {
-      root: "/account/",
-      hashbang: true,
-      signOutBase: "https://qapass.hujiang.com/logout/?url=",
-      syncHost: "https://qapass.",
-      syncRemeberDays: 14,
-      syncDomains: eval('(["hujiang.com","hjclass.com","hjenglish.com","cctalk.com","yeshj.com"])')
-    };
-  </script>
-  <script src="./head-e4e2b8e8ed936f18.js"></script>
   <!--[if lt IE 9]>
   <script type="text/javascript" src="http://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
   <script type="text/javascript" src="http://cdn.staticfile.org/es5-shim/4.3.1/es5-shim.min.js"></script>
   <![endif]-->
+
   <!--[if lt IE 10]>
   <script type="text/javascript" src="http://cdn.staticfile.org/classlist/2014.01.31/classList.min.js"></script>
   <![endif]-->
 </head>
-
 <body>
 
 
@@ -65,23 +55,21 @@
     <router-view></router-view>
   </div>
 
-
-  <script src="./vendors-977b035502cf9f91.js"></script>
   <script>
-    FastClick.attach(document.body), Promise.prototype["finally"] = function(t) {
-      var n = this.constructor;
-      return this.then(function(r) {
-        return n.resolve(t()).then(function() {
-          return r
-        })
-      }, function(r) {
-        return n.resolve(t()).then(function() {
-          throw r
-        })
-      })
-    };
+  var G = {
+    root: '/hujiang/account/',
+    hashbang: true,
+    signOutBase: 'https://qapass.hujiang.com/logout/?url=',
+    syncHost: "https://qapass.",
+    syncRemeberDays: 14,
+    syncDomains: eval('(["hujiang.com","hjclass.com","hjenglish.com","cctalk.com","yeshj.com"])')
+  };
   </script>
-  <script src="./app-c4f0aac63324be7f.js"></script>
-</body>
+  <script src="http://7u2rjq.com1.z0.glb.clouddn.com/co/as/vendors-cee334e1a3301398.js"></script>
+  <script>
+    FastClick.attach(document.body),Promise.prototype["finally"]=function(t){var n=this.constructor;return this.then(function(r){return n.resolve(t()).then(function(){return r})},function(r){return n.resolve(t()).then(function(){throw r})})};
+  </script>
+  <script src="http://7u2rjq.com1.z0.glb.clouddn.com/co/as/app-be4717d9b08cb097.js"></script>
 
+</body>
 </html>

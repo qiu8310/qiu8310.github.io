@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>More's Blog</title>
+  <title>Mora's Blog</title>
   <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimal-ui">
   <style type="text/css">
   .articles, .helpers {
@@ -22,7 +22,6 @@
   </style>
 </head>
 <body>
-
   <section class="articles">
     <h2>文章：</h2>
     <ul>
@@ -44,6 +43,29 @@
       </li>
     </ul>
   </section>
+
+  <section class="projects">
+      <h2>项目：</h2>
+      <ul id="projects-ul"></ul>
+  </section>
+
+  <script>
+    const DATA = {
+      projects: [
+        {title: '毕业项目：BPMN 流程图绘制工具', link: 'bpmn', time: '2012-06-15', description: '独立完成，交互参考国外项目 <a href="https://www.lucidchart.com">lucidchart</a>；主要使用 canvas 技术'},
+        {title: '可视化建站工具', link: 'site-editor', time: '2015-10-20', description: '自己折腾的一个 react 项目，主要是通过拖拽的方式来创建一个 Web 页面'},
+        {title: '沪江：个人主页（移动端）', link: 'hj-user-center', time: '2016-05-01', description: 'jquery 项目，前后端末分离'},
+        {title: '沪江：个人账户（移动端）', link: 'hj-account-mc', time: '2016-06-12', description: 'vue 1.0 项目'},
+        {title: '沪江：个人账户（桌面端）', link: 'hj-account-pc', time: '2016-07-02', description: 'angular 2.0 项目'},
+        {title: '沪江：消息中心（移动端）', link: 'hj-message-center', time: '2016-09-01', description: 'react 项目，服务端渲染'},
+      ]
+    }
+    document.getElementById('projects-ul').innerHTML = DATA.projects.map(p => {
+      return `<li>
+        <a class="title" href="./projects/${p.link}">${p.time}：${p.title}</a>
+      </li>`
+    }).join('')
+  </script>
 
 </body>
 </html>

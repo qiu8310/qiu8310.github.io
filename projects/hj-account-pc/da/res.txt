@@ -1,0 +1,26 @@
+bucket: mora
+baseUrl: http://7u2rjq.com1.z0.glb.clouddn.com/
+
+
+index.html:
+    co/asd/index-d5c0749ab9cc7f79.html
+polyfill.js:
+    co/asd/polyf-a0975b3d782e516a.js
+vendor.js:
+    co/asd/vendo-2025b3bf4498b097.js
+main.js:
+    co/asd/main-51b9483baa165734.js
+head.js:
+    co/asd/head-3ef9cbff62775586.js
+main.css:
+    co/asd/main-6e257d8212bed962.css
+106d53e89a9dac265705895fe4a62611.gif:
+    co/asd/106d5-f9defbbdb013bb07.gif
+06ef88688437ff6fa640168713331abb.png:
+    co/asd/06ef8-292dd22fa3e99135.png
+ec6087e480bebbbbf1c0f33704fa778b.png:
+    co/asd/ec608-a06319fa0203561f.png
+b296aced4c06d5194ee726983bdd2a61.png:
+    co/asd/b296a-0420b68e5692a3b9.png
+f2d6d3c8b42777d04bc95c206a6e6189.png:
+    co/asd/f2d6d-3517017566bf2483.png
