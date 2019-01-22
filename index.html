@@ -28,7 +28,7 @@
   }
   @media all and (min-width: 540px) {
     section {
-      width: 540px;
+      width: 900px;
     }
   }
   h3 {
@@ -104,26 +104,34 @@
     <h3>工具：</h3><ul class="tools-list list"></ul>
   </section>
 
-  <section class="articles">
+  <!-- <section class="articles">
     <h3>文章：</h3><ul class="articles-list list"></ul>
-  </section>
+  </section> -->
 
   <script>
     const DATA = {
-      articles: [
-        {title: '圆形加载条的三种实现方法', url: './articles/circle-progress/', time: '2015-09', description: '分别采用 css2/css3/canvas 来实现'},
-      ],
+      // articles: [
+      //   {title: '圆形加载条的三种实现方法', url: './articles/circle-progress/', time: '2015-09', description: '分别采用 css2/css3/canvas 来实现'},
+      // ],
       tools: [
         {title: '键盘事件查看器', url: './tools/keyboard-event-viewer/', time: '2016-08', description: '摘录自 <a href="http://w3c.github.io/uievents/tools/key-event-viewer.html" target="_blank">w3c uievents/tools</a>'},
         {title: '字体相关的术语', url: './tools/typeterms/', time: '2016-10', description: '摘录自 <a href="https://www.supremo.tv/typeterms/" target="_blank">typeterms</a>'},
       ],
       projects: [
-        {title: '毕业项目：BPMN 流程图绘制工具', url: './projects/bpmn/', time: '2012-06', description: '原生 js 项目，交互参考国外项目 <a href="https://www.lucidchart.com" target="_blank">lucidchart</a>；主要使用 canvas 技术'},
-        {title: '可视化建站工具', url: './projects/site-editor/', time: '2015-10', description: 'react 项目，主要是通过拖拽的方式来创建一个 Web 页面'},
-        // {title: '沪江：个人主页（移动端）(本地假数据)', url: './projects/hj-user-center-mc/', time: '2016-05', description: 'jquery 项目，前后端末分离'},
-        {title: '沪江：个人账户（移动端）(本地假数据)', url: './projects/hj-account-mc/', time: '2016-06', description: 'vue 1.0 项目'},
-        // {title: '沪江：个人账户（桌面端）(本地假数据)', url: './projects/hj-account-pc/', time: '2016-07', description: 'angular 2.0 项目'},
-        {title: '沪江：消息中心（移动端）(本地假数据)', url: 'https://mora-message.herokuapp.com', time: '2016-09', description: 'react 项目，服务端渲染，部署在 heroku 上'},
+        {title: 'dot-template', url: 'https://github.com/qiu8310/dot-template', time: '2018-03', description: '新建文件或文件夹时，可以自动填充文件内容或文件夹中的文件'},
+        {title: 'minapp', url: 'https://github.com/qiu8310/minapp', time: '2018-01', description: '微信小程序框架套件，包括 cli、框架、状态管理'},
+        {title: 'minapp-vscode', url: 'https://github.com/wx-minapp/minapp-vscode', time: '2018-01', description: 'vscode 插件市场下载量第一的小程序开发插件'},
+        {title: 'tinypng（node）', url: 'https://github.com/qiu8310/tinypng', time: '2017-03', description: '集成 tinypng 服务到 node api / webpack plugin / node cli 中'},
+        {title: 'deploy-asset（node）', url: 'https://github.com/qiu8310/deploy-asset', time: '2016-11', description: '根据入口的 html 文件，自动深度解析它所依赖的各类静态资源（包括 js、css、image、media等），解析完后支持对其各自压缩，然后给文件名加上打上其内容的 hash，最后可以上传到支持的云服务上（在 webpack 还不火的时候很实用）'},
+        {title: 'smart-npm（node）', url: 'https://github.com/qiu8310/smart-npm', time: '2016-09', description: '自动根据 npm 使用的命令来切换 registry（下载和发布 npm 包都很方便）'},
+        {title: 'mock 数据生成工具（node）', url: 'http://qiu8310.github.io/yod-mock/', time: '2016-08', description: '可以快速方便的生成随机数据'},
+        {title: '沪江：消息中心（h5）', url: 'https://mora-message.herokuapp.com', time: '2016-08', description: 'react 项目，服务端渲染，部署在 heroku 上'},
+        {title: '沪江：个人账户（web）', url: './projects/hj-account-pc/', time: '2016-07', description: 'angular 2.0 项目'},
+        {title: '沪江：个人账户（h5）', url: './projects/hj-account-mc/', time: '2016-06', description: 'vue 1.0 项目'},
+        // {title: '沪江：个人主页（h5）', url: './projects/hj-user-center-mc/', time: '2016-05', description: 'jquery 项目，前后端末分离'},
+        {title: '可视化建站工具（web）', url: './projects/site-editor/', time: '2015-10', description: 'react 项目，主要是通过拖拽的方式来创建一个 Web 页面'},
+        {title: 'window 版 crontab（java）', url: 'https://github.com/qiu8310/crontab', time: '2014-02', description: '可以像 Linux 一样在 window 上创建例行任务'},
+        {title: 'BPMN 流程图绘制工具（web）', url: './projects/bpmn/', time: '2012-06', description: '毕业设计时做的项目，交互参考国外项目 <a href="https://www.lucidchart.com" target="_blank">lucidchart</a>；主要使用 canvas 技术'},
       ]
     }
     Object.keys(DATA).forEach(function (key) {
