@@ -7,64 +7,146 @@
   <title>Mora's Blog</title>
   <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimal-ui">
   <style type="text/css">
-  .articles, .helpers {
-    width: 960px;
-    margin: 50px auto 0 auto;
+  ul, li, p, body, h1, h2, h3, h4 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
-  li {
-    line-height: 30px;
+  body { color: #333; padding-bottom: 30px; }
+  a {
+    color: #0366d6;
+    text-decoration: none;
   }
-  @media all and (max-width: 960px) {
-    .articles, .helpers {
-      width: auto;
+  a:hover {
+    text-decoration: underline;
+  }
+
+  section {
+    width: auto;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  @media all and (min-width: 540px) {
+    section {
+      width: 540px;
     }
+  }
+  h3 {
+    margin: 20px 10px;
+    font-weight: normal;
+    text-align: center;
+    font-size: 1.2em;
+  }
+  .list-item {
+    position: relative;
+    padding-left: 15px;
+  }
+  .list-item::after {
+    right: 12px;
+    top: 32px;
+    position: absolute;
+    content: "";
+    display: block;
+    width: 8px;
+    height: 8px;
+    border: 1px solid #A0A0A0;
+    transform: rotate(45deg);
+    border-left: transparent;
+    border-bottom: transparent;
+  }
+  .link {
+    padding: 8px 35px 8px 0;
+    border-bottom: 1px solid #EAEAEA;
+  }
+  .link-row-1 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  .link-row-1 span {
+    display: block;
+  }
+  .link-row-1 .title {
+    word-break: break-all;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 24px;
+    line-height: 24px;
+    flex: 1;
+  }
+  .link-row-1 .time {
+    width: 80px;
+    text-align: right;
+  }
+  .link-row-2, .time {
+    color: #A0A0A0;
+  }
+  .link-row-2 {
+    word-break: break-all;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 30px;
+    line-height: 30px;
   }
   </style>
 </head>
 <body>
-  <section class="articles">
-    <h2>文章：</h2>
-    <ul>
-      <li>
-        <a class="title" href="./articles/circle-progress/index.html">2015-09-09：圆形加载条的三种实现方法</a>
-      </li>
-    </ul>
-
-  </section>
-
-  <section class="helpers">
-    <h2>工具：</h2>
-    <ul>
-      <li>
-        <a class="title" href="./helpers/keyboard-event-viewer/index.html">2016-08-11：键盘事件查看器</a>
-      </li>
-      <li>
-        <a class="title" href="./helpers/typeterms/index.html">2016-10-09：字体相关的术语</a>&nbsp;&nbsp;<a href="https://www.supremo.tv/typeterms/" target="_blank">original</a>
-      </li>
-    </ul>
-  </section>
 
   <section class="projects">
-      <h2>项目：</h2>
-      <ul id="projects-ul"></ul>
+      <h3>项目：</h3><ul class="projects-list list"></ul>
+  </section>
+
+
+  <section class="tools">
+    <h3>工具：</h3><ul class="tools-list list"></ul>
+  </section>
+
+  <section class="articles">
+    <h3>文章：</h3><ul class="articles-list list"></ul>
   </section>
 
   <script>
     const DATA = {
+      articles: [
+        {title: '圆形加载条的三种实现方法', url: './articles/circle-progress/', time: '2015-09', description: '分别采用 css2/css3/canvas 来实现'},
+      ],
+      tools: [
+        {title: '键盘事件查看器', url: './tools/keyboard-event-viewer/', time: '2016-08', description: '摘录自 <a href="http://w3c.github.io/uievents/tools/key-event-viewer.html" target="_blank">w3c uievents/tools</a>'},
+        {title: '字体相关的术语', url: './tools/typeterms/', time: '2016-10', description: '摘录自 <a href="https://www.supremo.tv/typeterms/" target="_blank">typeterms</a>'},
+      ],
       projects: [
-        {title: '毕业项目：BPMN 流程图绘制工具', link: 'bpmn', time: '2012-06-15', description: '独立完成，交互参考国外项目 <a href="https://www.lucidchart.com">lucidchart</a>；主要使用 canvas 技术'},
-        {title: '可视化建站工具', link: 'site-editor', time: '2015-10-20', description: '自己折腾的一个 react 项目，主要是通过拖拽的方式来创建一个 Web 页面'},
-        {title: '沪江：个人主页（移动端）', link: 'hj-user-center', time: '2016-05-01', description: 'jquery 项目，前后端末分离'},
-        {title: '沪江：个人账户（移动端）', link: 'hj-account-mc', time: '2016-06-12', description: 'vue 1.0 项目'},
-        {title: '沪江：个人账户（桌面端）', link: 'hj-account-pc', time: '2016-07-02', description: 'angular 2.0 项目'},
-        {title: '沪江：消息中心（移动端）', link: 'hj-message-center', time: '2016-09-01', description: 'react 项目，服务端渲染'},
+        {title: '毕业项目：BPMN 流程图绘制工具', url: './projects/bpmn/', time: '2012-06', description: '原生 js 项目，交互参考国外项目 <a href="https://www.lucidchart.com" target="_blank">lucidchart</a>；主要使用 canvas 技术'},
+        {title: '可视化建站工具', url: './projects/site-editor/', time: '2015-10', description: 'react 项目，主要是通过拖拽的方式来创建一个 Web 页面'},
+        // {title: '沪江：个人主页（移动端）(本地假数据)', url: './projects/hj-user-center-mc/', time: '2016-05', description: 'jquery 项目，前后端末分离'},
+        {title: '沪江：个人账户（移动端）(本地假数据)', url: './projects/hj-account-mc/', time: '2016-06', description: 'vue 1.0 项目'},
+        // {title: '沪江：个人账户（桌面端）(本地假数据)', url: './projects/hj-account-pc/', time: '2016-07', description: 'angular 2.0 项目'},
+        {title: '沪江：消息中心（移动端）(本地假数据)', url: 'https://mora-message.herokuapp.com', time: '2016-09', description: 'react 项目，服务端渲染，部署在 heroku 上'},
       ]
     }
-    document.getElementById('projects-ul').innerHTML = DATA.projects.map(p => {
-      return `<li>
-        <a class="title" href="./projects/${p.link}">${p.time}：${p.title}</a>
-      </li>`
-    }).join('')
+    Object.keys(DATA).forEach(function (key) {
+
+      document.querySelector('.' + key + '-list').innerHTML = DATA[key].map(p => {
+        return `<li class="list-item">
+          <div class="link" href="${p.url}">
+            <p class="link-row link-row-1">
+              <span class="title">${p.title} </span>
+              <span class="time">${p.time}</span>
+            </p>
+            <p class="link-row link-row-2">${p.description}</p>
+          </div>
+        </li>`
+      }).join('')
+
+    })
+    document.body.addEventListener('click', e => {
+      /** @type Element */
+      let n = e.target
+      if (n.nodeName === 'A') return
+      if (!n.classList.contains('link')) n = n.closest('.link')
+      if (n && n.getAttribute('href')) return location.href = n.getAttribute('href')
+    })
   </script>
 
 </body>
