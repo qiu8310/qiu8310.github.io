@@ -27,6 +27,13 @@
       "items": {
         "type": "string"
       }
+    },
+    "sideEffects": {
+      "description": "告诉打包工具（如 webpack）此项目代码是否有副作用 https://webpack.js.org/guides/tree-shaking/",
+      "type": ["array", "boolean"],
+      "items": {
+        "type": "string"
+      }
     }
   }
 }
