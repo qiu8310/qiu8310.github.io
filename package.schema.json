@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$ref": "http://json.schemastore.org/package",
+  "properties": {
+    "eslintConfig": {
+      "description": "eslint 配置信息 https://eslint.org/docs/user-guide/configuring",
+      "$ref": "http://json.schemastore.org/eslintrc"
+    },
+    "eslintIgnore": {
+      "type": "array",
+      "description": "eslint 需要忽略的文件 https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories",
+      "items": {
+        "type": "string"
+      }
+    },
+    "prettier": {
+      "description": "prettier 配置信息",
+      "$ref": "http://json.schemastore.org/prettierrc"
+    },
+    "babel": {
+      "description": "babel 配置信息 https://babeljs.io/docs/en/configuration",
+      "$ref": "http://json.schemastore.org/babelrc"
+    },
+    "browserslist": {
+      "type": "array",
+      "description": "browserslist 配置信息 https://github.com/browserslist/browserslist#best-practices",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
