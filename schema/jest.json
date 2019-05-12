@@ -1,0 +1,206 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "JSON schema form jest",
+  "description": "https://jestjs.io/docs/en/configuration.html",
+  "definitions": {
+    "arrayOfString": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "objectOfString": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "coverageThreshold": {
+      "type": "object",
+      "properties": {
+        "branches": {"type": "number"},
+        "functions": {"type": "number"},
+        "lines": {"type": "number"},
+        "statements": {"type": "number"}
+      }
+    }
+  },
+  "properties": {
+    "automock": {
+      "type": "boolean",
+      "default": false,
+      "description": "This option tells Jest that all imported modules in your tests should be mocked automatically. All modules used in your tests will have a replacement implementation, keeping the API surface."
+    },
+    "bail": {
+      "type": ["number", "boolean"],
+      "default": 0,
+      "description": "By default, Jest runs all tests and produces all errors into the console upon completion. The bail config option can be used here to have Jest stop running tests after n failures. Setting bail to true is the same as setting bail to 1."
+    },
+    "browser": {
+      "type": "boolean",
+      "default": false,
+      "description": "Respect Browserify's \"browser\" field in package.json when resolving modules. Some modules export different versions based on whether they are operating in Node or a browser."
+    },
+    "cacheDirectory": {
+      "type": "string",
+      "default": "/tmp/<path>",
+      "description": "The directory where Jest should store its cached dependency information."
+    },
+    "clearMocks": {
+      "type": "boolean",
+      "description": "Automatically clear mock calls and instances between every test. Equivalent to calling jest.clearAllMocks() between each test. This does not remove any mock implementation that may have been provided."
+    },
+    "collectCoverage": {
+      "type": "boolean",
+      "description": "Indicates whether the coverage information should be collected while executing the test. Because this retrofits all executed files with coverage collection statements, it may significantly slow down your tests."
+    },
+    "collectCoverageFrom": {
+      "$ref": "#/definitions/arrayOfString",
+      "description": "An array of glob patterns indicating a set of files for which coverage information should be collected. If a file matches the specified glob pattern, coverage information will be collected for it even if no tests exist for this file and it's never required in the test suite."
+    },
+    "coverageDirectory": {
+      "type": "string"
+    },
+    "coveragePathIgnorePatterns": {
+      "$ref": "#/definitions/arrayOfString",
+      "default": ["/node_modules/"],
+      "description": "An array of regexp pattern strings that are matched against all file paths before executing the test. If the file path matches any of the patterns, coverage information will be skipped."
+    },
+    "coverageReporters": {
+      "$ref": "#/definitions/arrayOfString",
+      "default": ["json", "lcov", "text", "clover"],
+      "description": "A list of reporter names that Jest uses when writing coverage reports. Any istanbul reporter can be used."
+    },
+    "coverageThreshold": {
+      "global": {"$ref": "#/definitions/coverageThreshold"},
+      "additionalProperties": {"$ref": "#/definitions/coverageThreshold"}
+    },
+    "displayName": {
+      "type": ["string", "object"]
+    },
+    "errorOnDeprecated": {
+      "type": "boolean",
+      "description": "Make calling deprecated APIs throw helpful error messages. Useful for easing the upgrade process."
+    },
+    "extraGlobals": {
+      "$ref": "#/definitions/arrayOfString",
+      "description": "Test files run inside a vm, which slows calls to global context properties (e.g. Math). With this option you can specify extra properties to be defined inside the vm for faster lookups."
+    },
+    "globals": {
+      "type": "object",
+      "description": "A set of global variables that need to be available in all test environments."
+    },
+    "globalSetup": {
+      "type": "string",
+      "description": "This option allows the use of a custom global setup module which exports an async function that is triggered once before all test suites. This function gets Jest's globalConfig object as a parameter"
+    },
+    "globalTeardown": {
+      "type": "string",
+      "description": "This option allows the use of a custom global teardown module which exports an async function that is triggered once after all test suites. This function gets Jest's globalConfig object as a parameter."
+    },
+    "maxConcurrency": {
+      "type": "number",
+      "default": 5,
+      "description": "A number limiting the number of tests that are allowed to run at the same time when using test.concurrent. Any test above this limit will be queued and executed once a slot is released."
+    },
+    "moduleDirectories": {
+      "$ref": "#/definitions/arrayOfString",
+      "default": ["node_modules"],
+      "description": "An array of directory names to be searched recursively up from the requiring module's location. Setting this option will override the default, if you wish to still search node_modules for packages include it along with any other options: [\"node_modules\", \"bower_components\"]"
+    },
+    "moduleFileExtensions": {
+      "$ref": "#/definitions/arrayOfString",
+      "default": ["js", "json", "jsx", "ts", "tsx", "node"],
+      "description": "An array of file extensions your modules use. If you require modules without specifying a file extension, these are the extensions Jest will look for, in left-to-right order."
+    },
+    "moduleNameMapper": {
+      "$ref": "#/definitions/objectOfString",
+      "description": "A map from regular expressions to module names that allow to stub out resources, like images or styles with a single module."
+    },
+    "modulePathIgnorePatterns": {
+      "$ref": "#/definitions/arrayOfString",
+      "description": "An array of regexp pattern strings that are matched against all module paths before those paths are to be considered 'visible' to the module loader. If a given module's path matches any of the patterns, it will not be require()-able in the test environment."
+    },
+    "modulePaths": {
+      "$ref": "#/definitions/arrayOfString",
+      "description": "An alternative API to setting the NODE_PATH env variable, modulePaths is an array of absolute paths to additional locations to search when resolving modules. Use the <rootDir> string token to include the path to your project's root directory. Example: [\"<rootDir>/app/\"]."
+    },
+    "notify": {
+      "type": "boolean",
+      "description": "Activates notifications for test results."
+    },
+    "notifyMode": {
+      "type": "string",
+      "enum": ["always", "failure", "success", "change", "success-change", "failure-change"],
+      "default": "failure-change"
+    },
+    "preset": {
+      "type": "string",
+      "description": "A preset that is used as a base for Jest's configuration. A preset should point to an npm module that has a jest-preset.json or jest-preset.js file at the root."
+    },
+    "prettierPath": {
+      "type": "string",
+      "description": "Sets the path to the prettier node module used to update inline snapshots."
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": ["string", "object"]
+      },
+      "description": "When the projects configuration is provided with an array of paths or glob patterns, Jest will run tests in all of the specified projects at the same time. This is great for monorepos or when working on multiple projects at the same time."
+    },
+    "reporters": {
+      "type": "array",
+      "items": {
+        "type": ["string", "array"]
+      },
+      "description": "Use this configuration option to add custom reporters to Jest. A custom reporter is a class that implements onRunStart, onTestStart, onTestResult, onRunComplete methods that will be called when any of those events occurs."
+    },
+    "resetMocks": {
+      "type": "boolean"
+    },
+    "resetModules": {
+      "type": "boolean"
+    },
+    "resolver": {
+      "type": "string",
+      "description": "This option allows the use of a custom resolver. This resolver must be a node module that exports a function expecting a string as the first argument for the path to resolve and an object with the following structure as the second argument:"
+    },
+    "restoreMocks": {
+      "type": "boolean"
+    },
+    "rootDir": {
+      "type": "string"
+    },
+    "roots": {
+      "$ref": "#/definitions/arrayOfString",
+      "description": "A list of paths to directories that Jest should use to search for files in."
+    },
+    "runner": {
+      "type": "string",
+      "description": "This option allows you to use a custom runner instead of Jest's default test runner."
+    },
+    "setupFiles": {"$ref": "#/definitions/arrayOfString"},
+    "setupFilesAfterEnv": {"$ref": "#/definitions/arrayOfString"},
+    "snapshotResolver": {"type": "string"},
+    "snapshotSerializers": {"$ref": "#/definitions/arrayOfString"},
+    "testEnvironment": {"type": "string", "default": "jsdom", "enum": ["jsdom", "node"]},
+    "testEnvironmentOptions": {},
+    "testMatch": {"$ref": "#/definitions/arrayOfString"},
+    "testPathIgnorePatterns": {"$ref": "#/definitions/arrayOfString"},
+    "testRegex": {"type": ["string", "array"]},
+    "testResultsProcessor": {"type": "string"},
+    "testRunner": {"type": "string"},
+    "testURL": {"type": "string"},
+    "timers": {"type": "string", "default": "real", "enum": ["real", "fake"]},
+    "transform": {"$ref": "#/definitions/objectOfString"},
+    "transformIgnorePatterns": {"$ref": "#/definitions/arrayOfString"},
+    "unmockedModulePathPatterns": {"$ref": "#/definitions/arrayOfString"},
+    "verbose": {
+      "type": "boolean",
+      "description": "Indicates whether each individual test should be reported during the run. All errors will also still be shown on the bottom after execution."
+    },
+    "watchPathIgnorePatterns": {"$ref": "#/definitions/arrayOfString"},
+    "watchPlugins": {}
+  }
+}

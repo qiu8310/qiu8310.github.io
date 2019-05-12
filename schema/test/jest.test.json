@@ -1,0 +1,9 @@
+{
+  "$schema": "../jest.json",
+  "moduleNameMapper": {
+    "abc": "aa"
+  },
+  "reporters": [
+    ["aa", {}]
+  ]
+}

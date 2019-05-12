@@ -21,6 +21,10 @@
       "description": "babel 配置信息 https://babeljs.io/docs/en/configuration",
       "$ref": "http://json.schemastore.org/babelrc"
     },
+    "jest": {
+      "description": "jest 配置信息 https://jestjs.io/docs/en/configuration.html",
+      "$ref": "./jest.json"
+    },
     "browserslist": {
       "type": "array",
       "description": "browserslist 配置信息 https://github.com/browserslist/browserslist#best-practices",
