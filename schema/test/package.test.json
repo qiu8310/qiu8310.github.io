@@ -1,0 +1,8 @@
+{
+  "$schema": "../package.json",
+  "name": "qiu8310.github.io",
+  "private": true,
+  "babel": {
+    "plugins": []
+  }
+}

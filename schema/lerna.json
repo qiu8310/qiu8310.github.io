@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "JSON schema form lerna.json (lerna@3.0)",
+  "description": "https://github.com/lerna/lerna",
+  "definitions": {
+    "arrayOfString": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "npmClient": {
+      "type": "string",
+      "description": "an option to specify a specific client to run commands with (this can also be specified on a per command basis). Change to 'yarn' to run all commands with yarn. Defaults to 'npm'."
+    },
+    "packages": {
+      "$ref": "#/definitions/arrayOfString",
+      "description": "Array of globs to use as package locations."
+    },
+    "command": {
+      "type": "object",
+      "properties": {
+        "publish": {
+          "type": "object",
+          "properties": {
+            "ignoreChanges": {
+              "$ref": "#/definitions/arrayOfString",
+              "description": "an array of globs that won't be included in lerna changed/publish. Use this to prevent publishing a new version unnecessarily for changes, such as fixing a README.md typo.",
+              "default": ["ignored-file", "*.md"]
+            },
+            "message": {
+              "type": "string",
+              "description": "a custom commit message when performing version updates for publication. See @lerna/version for more details.",
+              "default": "chore(release): publish"
+            }
+          }
+        },
+        "bootstrap": {
+          "type": "object",
+          "properties": {
+            "ignore": {
+              "$ref": "#/definitions/arrayOfString",
+              "description": " an array of globs that won't be bootstrapped when running the lerna bootstrap command."
+            },
+            "npmClientArgs": {
+              "$ref": "#/definitions/arrayOfString",
+              "description": "array of strings that will be passed as arguments directly to npm install during the lerna bootstrap command."
+            },
+            "scope": {
+              "$ref": "#/definitions/arrayOfString",
+              "description": "an array of globs that restricts which packages will be bootstrapped when running the lerna bootstrap command."
+            }
+          }
+        }
+      }
+    }
+  }
+}
