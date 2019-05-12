@@ -23,7 +23,7 @@
     },
     "jest": {
       "description": "jest 配置信息 https://jestjs.io/docs/en/configuration.html",
-      "$ref": "./jest.json"
+      "$ref": "https://qiu8310.github.io/schema/jest.json"
     },
     "browserslist": {
       "type": "array",
