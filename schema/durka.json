@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "JSON schema form durka.json",
+  "description": "https://github.com/durkajs",
+  "definitions": {
+    "Command": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "npm 项目名称"
+        },
+        "version": {
+          "type": "string",
+          "description": "npm 项目版本号，可以是一个范围，或一个 tag"
+        },
+        "args": {
+          "type": "array",
+          "description": "额外注入到下游命令行的参数，默认会将当前执行的命令填充在第一项里",
+          "items": {
+            "type": "string"
+          }
+        },
+        "desc": {
+          "type": "string",
+          "description": "命令描述"
+        },
+        "registry": {
+          "type": "string",
+          "description": "npm 仓库地址，默认使用的是淘宝镜像"
+        },
+        "path": {
+          "type": "string",
+          "description": "命令所在的路径，如果不指定会默认根据 npm 解析"
+        },
+        "local": {
+          "type": "string",
+          "description": "本地调试时，用于指定本地命令行文件的路径，这样可以避免下载远程仓库"
+        },
+        "checkUpdateInterval": {
+          "type": "number",
+          "description": "检查更新的频率，默认 2 天"
+        }
+      }
+    }
+  },
+  "properties": {
+    "commands": {
+      "type": "object",
+      "default": {},
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "可以指定成 name@version 的格式"
+          },
+          {
+            "type": "object",
+            "$ref": "#/definitions/Command"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "$schema": "../durka.json",
+  "commands": {
+    "a": "aaa@bbbb",
+    "b": {
+      "name": ""
+    }
+  }
+}
