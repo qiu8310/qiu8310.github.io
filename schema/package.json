@@ -3,6 +3,9 @@
   "$ref": "http://json.schemastore.org/package",
   "properties": {
     "durka": {
+      "default": {
+        "commands": {}
+      },
       "description": "durka 配置信息",
       "$ref": "https://qiu8310.github.io/schema/durka.json"
     },

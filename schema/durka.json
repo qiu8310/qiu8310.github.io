@@ -47,7 +47,6 @@
   "properties": {
     "commands": {
       "type": "object",
-      "default": {},
       "additionalProperties": {
         "oneOf": [
           {
