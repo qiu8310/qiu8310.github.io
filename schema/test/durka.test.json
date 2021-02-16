@@ -1,9 +1,13 @@
 {
   "$schema": "../durka.json",
   "commands": {
-    "a": "aaa@bbbb",
-    "b": {
-      "name": ""
+    "dev": "@scope/aaa@bb.bb",
+    "build:*": {
+      "path": ""
+    },
+    "compile": {
+      "name": "a",
+      "path": ""
     }
   }
 }
