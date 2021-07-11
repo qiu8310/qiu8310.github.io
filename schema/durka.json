@@ -19,7 +19,7 @@
         "version": {
           "type": "string",
           "description": "npm 项目版本号，可以是一个范围，或一个 tag",
-          "pattern": "^[\\w.-]+$"
+          "pattern": "^[<>=\\w.-]+$"
         },
         "registry": {
           "type": "string",
@@ -63,7 +63,7 @@
           {
             "type": "string",
             "description": "值可以指定成 `name` 或 `@scope/name@version` 或 `name@version` 的格式，其中 version 可以包含 ^ 或 ~ 前缀",
-            "pattern": "^(@[\\w-]+/)?[\\w-]+(@[\\w.-]+)?$"
+            "pattern": "^(@[\\w-]+/)?[\\w-]+(@[<>=\\w.-]+)?$"
           },
           {
             "type": "object",
