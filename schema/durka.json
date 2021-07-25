@@ -52,6 +52,23 @@
     }
   },
   "properties": {
+    "language": {
+      "type": "string",
+      "default": "typescript",
+      "description": "指定项目所使用的语言",
+      "enum": ["typescript", "javascript"]
+    },
+    "env": {
+      "type": "string",
+      "default": "any",
+      "description": "指定项目所使用的环境",
+      "enum": ["node", "browser", "electron", "vscode", "any"]
+    },
+    "framework": {
+      "type": "string",
+      "description": "指定项目所使用的框架",
+      "enum": ["react", "vue"]
+    },
     "commands": {
       "type": "object",
       "propertyNames": {
