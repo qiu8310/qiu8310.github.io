@@ -1,0 +1,49 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pyodide Test</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimal-ui">
+  <style type="text/css">
+  </style>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.20.0/full/pyodide.js"></script>
+</head>
+<body>
+
+  <div style="text-align: center;">
+    <p><a href="https://pyodide.org/en/stable/usage/index.html">pyodide document</a></p>
+    <p><a href="./console.html">python repl</a></p>
+  </div>
+
+  <script>
+    async function main() {
+      let pyodide = await loadPyodide()
+      globalThis.pyodide = pyodide
+
+      await pyodide.loadPackage("micropip")
+      await pyodide.loadPackage("numpy")
+
+      // Pyodide is now ready to use...
+      console.log(pyodide.runPython(`
+        import js
+        import sys
+        import numpy
+        x = numpy.ones((3, 4))
+
+        # Accessing JavaScript scope from Python
+        div = js.document.createElement("div")
+        div.innerHTML = "<h1>This element was created from Python</h1>"
+        js.document.body.append(div)
+
+        sys.version
+      `))
+
+      // Accessing Python scope from JavaScript
+      console.log(pyodide.globals.get('x').toJs())
+    }
+    main()
+  </script>
+</body>
+</html>

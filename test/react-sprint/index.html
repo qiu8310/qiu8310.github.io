@@ -1,0 +1,178 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React Sprint</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimal-ui">
+  <link rel="stylesheet" type="text/css" href="./nemo/dark.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/react-antd-tools@1.0.0/vendor/antd-with-icons.production.css" rel="stylesheet">
+  <style>
+    .ccard-main {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .ccard {
+      width: 20ch;
+      height: 20ch;
+      background: hotpink;
+      border-radius: 5px;
+      transition: box-shadow 0.5s;
+      will-change: transform;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <script type="text/javascript" src="https://unpkg.com/react-antd-tools@1.1.0/vendor/antd-with-icons.production.js"></script>
+  <script type="text/javascript" src="./nemo/index.umd.min.js"></script>
+  <!-- Don't use this in production: -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const { Panel } = nemoPanel
+    const { useSpring, animated } = ReactSpring
+
+    const calc = (x, y, rect) => [
+      -(y - rect.top - rect.height / 2) / 5,
+      (x - rect.left - rect.width / 2) / 5,
+      1.4
+    ];
+    const trans = (x, y, s) => `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
+
+    const props = {
+      mass: 1,
+      tension: 170,
+      friction: 26,
+      clamp: false,
+      precision: 0.01,
+      velocity: 0,
+      easing: 'linear',
+      damping: 1,
+      progress: 0,
+    };
+    const schema = {
+      type: 'object',
+      properties: {
+        // preset: {
+        //   type: 'select',
+        //   refLink: 'https://react-spring.io/common/configs#presets',
+        //   renderOptions: {
+        //     options: Object.keys(ReactSpring.config).map(value => ({ value }))
+        //   }
+        // },
+        mass: {
+          type: 'number',
+          description: 'spring mass',
+          refLink: 'https://react-spring.io/common/configs',
+        },
+        tension: {
+          type: 'number',
+          description: 'spring energetic load',
+        },
+        friction: {
+          type: 'number',
+          description: 'spring resistance',
+        },
+        clamp: {
+          type: 'boolean',
+          renderType: 'radioGroup',
+          description: 'when true, stops the spring once it overshoots its boundaries',
+        },
+        precision: {
+          type: 'number',
+          description: 'how close to the end result the animated value gets before we consider it to be "there", this is important with spring animations'
+        },
+        velocity: {
+          type: 'number',
+          description: 'initial velocity',
+        },
+        easing: {
+          type: 'string',
+          description: 'linear by default, you can use any easing you want, for instance d3-ease',
+          renderType: 'select',
+          renderOptions: {
+            options: Object.keys(ReactSpring.easings).map(value => ({ value }))
+          },
+          refLink: 'https://react-spring.io/common/configs#easings',
+        },
+        damping: {
+          type: 'number',
+          description: 'The damping ratio, which dictates how the spring slows down. Only works when `frequency` is defined'
+        },
+        progress: {
+          type: 'number',
+          description: 'When used with `duration`, it decides how far into the easing function to start from. The duration itself is unaffected'
+        },
+        duration: {
+          type: 'number',
+          description: 'if > than 0 will switch to a duration-based animation instead of spring physics, value should be indicated in milliseconds (e.g. duration: 250 for a duration of 250ms)'
+        },
+        decay: {
+          type: 'number',
+          description: '`number` of decay rate',
+        },
+        frequency: {
+          type: 'number',
+          description: 'The natural frequency (in seconds), which dictates the number of bounces per second when no damping exists. When defined, `tension` is derived from this, and `friction` is derived from `tension` and `damping`',
+        },
+        round: {
+          type: 'number',
+          description: 'While animating, round to the nearest multiple of this number. The `from` and `to` values are never rounded, as well as any value passed to the `set` method of an animated value',
+        },
+        bounce: {
+          type: 'number',
+          description: 'When above zero, the spring will bounce instead of overshooting when exceeding its goal value',
+        },
+        restVelocity: {
+          type: 'number',
+          description: 'The smallest velocity before the animation is considered to be "not moving". When undefined, precision is used instead',
+        },
+      }
+    }
+    function MyApp() {
+      const [xys, setXYS] = React.useState([0, 0, 1]);
+      const ref = React.useRef(null);
+      const [v, setV] = React.useState({ props });
+
+      const springConfig = {...v.props}
+      if (typeof springConfig.easing === 'string') springConfig.easing = ReactSpring.easings[springConfig.easing]
+      const springProps = useSpring({ xys, config: springConfig });
+
+      return (
+        <div style={{ display: 'flex', width: '90vw', minHeight: '100vh', margin: '0 auto' }}>
+          <pre>{JSON.stringify(v.props, null, 2)}</pre>
+          <div style={{ background: '#fafafa', flex: 1, padding: 24 }}>
+            <div className="ccard-main" ref={ref}>
+              <animated.div
+                className="ccard"
+                style={{ transform: springProps.xys.to(trans) }}
+                onMouseLeave={() => setXYS([0, 0, 1])}
+                onMouseMove={(e) => {
+                  const rect = ref.current.getBoundingClientRect();
+                  setXYS(calc(e.clientX, e.clientY, rect));
+                }}
+              />
+            </div>
+          </div>
+          <Panel
+            propsConfig={schema}
+            value={v}
+            onChange={(e) => setV(e)}
+            style={{ width: 300, float: 'left' }}
+          />
+        </div>
+      )
+    }
+
+    ReactDOM.render(<MyApp />, document.getElementById('root'));
+  </script>
+</body>
+</html>
