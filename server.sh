@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # python 2
-python -m SimpleHTTPServer
+# python -m SimpleHTTPServer
 
 # python 3
-# python -m http.server
+python3 -m http.server

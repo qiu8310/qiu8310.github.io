@@ -1,0 +1,36 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>项目看板</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimal-ui">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/react-antd-tools@1.0.0/vendor/antd-with-icons.production.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./index.css" rel="stylesheet">
+  <style>
+    .ant-table.ant-table-small .ant-table-footer, .ant-table.ant-table-small .ant-table-tbody>tr>td, .ant-table.ant-table-small .ant-table-thead>tr>th, .ant-table.ant-table-small .ant-table-title, .ant-table.ant-table-small tfoot>tr>td, .ant-table.ant-table-small tfoot>tr>th {
+      padding: 2px 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="loading">
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+  </div>
+  <div id="root"></div>
+
+  <script type="text/javascript" src="https://unpkg.com/react-antd-tools@1.1.0/vendor/antd-with-icons.production.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/echarts@5.3.2/dist/echarts.min.js"></script>
+  <!-- Don't use this in production: -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./app.jsx" type="text/babel"></script>
+  <script type="text/babel">
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
