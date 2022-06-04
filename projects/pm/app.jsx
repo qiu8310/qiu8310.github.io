@@ -180,7 +180,7 @@ function makeTableColumn(table, columnKey) {
     }
   }
   if (config?.filters?.includes(columnKey)) {
-    column.filters = _.uniq(table.body.map(r => r[columnKey])).map(text => ({ text, value: text }))
+    column.filters = uniq(table.body.map(r => r[columnKey])).map(text => ({ text, value: text }))
     column.onFilter = (value, record) => record[columnKey] === value
   }
   if (config?.sorts?.includes(columnKey)) {
@@ -330,4 +330,11 @@ function load(url) {
     LOAD_CACHE[url] = data
     return data
   })
+}
+function uniq(arr) {
+  let newArr = []
+  arr.forEach(it => {
+    if (!newArr.includes(it)) newArr.push(it)
+  })
+  return newArr
 }
