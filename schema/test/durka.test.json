@@ -9,9 +9,5 @@
       "name": "a",
       "path": ""
     }
-  },
-  "githooks": {
-    "commit-msg": "",
-    "commit-msg2": ""
   }
 }
