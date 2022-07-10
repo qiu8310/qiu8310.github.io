@@ -89,6 +89,15 @@
         ]
       }
     },
+    "hooks": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
     "esmDependencies": {
       "type": "array",
       "description": "指定 esm 的依赖模块，便于在 cli 工具中做特殊处理，比如 jest 需要转化成 commonjs 才能用",
