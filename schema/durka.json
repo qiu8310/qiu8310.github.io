@@ -91,6 +91,7 @@
     },
     "githooks": {
       "type": "object",
+      "description": "像 husky 一样配置 git hooks 并联的命令，支持的 hooks 可以参考 https://git-scm.com/docs/githooks",
       "propertyNames": {
         "type": "string"
       },
