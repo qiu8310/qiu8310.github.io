@@ -89,7 +89,7 @@
         ]
       }
     },
-    "hooks": {
+    "githooks": {
       "type": "object",
       "propertyNames": {
         "type": "string"
