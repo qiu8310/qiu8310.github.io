@@ -20,6 +20,10 @@
         "type": "string"
       }
     },
+    "commitlint": {
+      "description": "commitlint 配置信息 https://github.com/conventional-changelog/commitlint/blob/master/docs/reference-rules.md",
+      "$ref": "https://json.schemastore.org/commitlintrc.json"
+    },
     "prettier": {
       "description": "prettier 配置信息",
       "$ref": "http://json.schemastore.org/prettierrc"

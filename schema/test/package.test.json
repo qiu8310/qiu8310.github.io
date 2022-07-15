@@ -4,5 +4,8 @@
   "private": true,
   "babel": {
     "plugins": []
+  },
+  "commitlint": {
+
   }
 }
