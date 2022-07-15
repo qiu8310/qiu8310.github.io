@@ -73,7 +73,7 @@
       "type": "object",
       "propertyNames": {
         "type": "string",
-        "pattern": "^[\\w\\*:-]+$"
+        "pattern": "^[,\\w\\*:-]+$"
       },
       "additionalProperties": {
         "oneOf": [
