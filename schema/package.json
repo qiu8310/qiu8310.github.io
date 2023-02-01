@@ -1,6 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$ref": "http://json.schemastore.org/package",
+  "allOf": [{
+    "$ref": "http://json.schemastore.org/package"
+  }],
   "properties": {
     "durka": {
       "default": {
@@ -36,8 +38,12 @@
       "description": "jest 配置信息 https://jestjs.io/docs/en/configuration.html",
       "$ref": "https://qiu8310.github.io/schema/jest.json"
     },
+    "ts-jest": {
+      "type": "object",
+      "description": "[Only for durka] ts-jest 配置信息 https://kulshekhar.github.io/ts-jest/docs/getting-started/options#options"
+    },
     "browserslist": {
-      "type": "array",
+      "type": ["array", "object"],
       "description": "browserslist 配置信息 https://github.com/browserslist/browserslist#best-practices",
       "items": {
         "type": "string"
