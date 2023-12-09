@@ -1,0 +1,8 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["snippet.test.json"],
+      "url": "/schema/snippet.json"
+    }
+  ]
+}

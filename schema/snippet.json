@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "JSON schema form durka-vscode smart-snippet",
+  "description": "https://marketplace.visualstudio.com/items?itemName=qiu8310.durka-vscode",
+  "definitions": {
+    "common": {
+      "properties": {
+        "prefix": {
+          "type": "string",
+          "description": "Trigger prefix"
+        },
+        "body": {
+          "type": ["string", "array"],
+          "description": "Completion content, syntax on https://code.visualstudio.com/docs/editor/userdefinedsnippets#_snippet-syntax",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cssPrefix": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "description": "Long description for the snippet, support markdown or basic html"
+        },
+        "img": {
+          "type": "string",
+          "description": "Img link or html img tag with custom width and height property"
+        },
+        "cmd": {
+          "type": "string",
+          "description": "Link url or some vscode command like: command:myCommandId..."
+        },
+        "cmdTitle": {
+          "type": "string",
+          "description": "Command title, will ignored when cmd is `[...](...)` format"
+        }
+      }
+    },
+    "cascade": {
+      "type": "object",
+      "allOf": [{
+        "$ref": "#/definitions/common"
+      }],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Short description for the snippet"
+        },
+        "stop": { 
+          "type": "boolean",
+          "description": "Stop the cascade snippet"
+        },
+        "children": {
+          "type": "array",
+          "description": "Child snippets",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/cascade"
+          }
+        }
+      }
+    }
+  },
+  "type": ["array", "object"],
+  "items": {
+    "allOf": [{
+      "$ref": "#/definitions/cascade"
+    }],
+    "type": "object"
+  },
+  "additionalProperties": {
+    "allOf": [{
+      "$ref": "#/definitions/common"
+    }]
+  }
+}
