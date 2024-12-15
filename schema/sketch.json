@@ -1,0 +1,153 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Sketch Plugin Manifest",
+  "description": "A JSON Schema for validating Sketch plugin manifest files.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The human-readable name of the plugin."
+    },
+    "description": {
+      "type": "string",
+      "description": "A general description of what the plugin does."
+    },
+    "author": {
+      "type": "string",
+      "description": "The name of the plugin author."
+    },
+    "authorEmail": {
+      "type": "string",
+      "format": "email",
+      "description": "The email address to contact the plugin author."
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri",
+      "description": "A website address where users can find more information about the plugin."
+    },
+    "version": {
+      "type": "string",
+      "description": "The version of the plugin using semantic versioning."
+    },
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(\\.[a-z0-9]+)+$",
+      "description": "A unique identifier for the plugin using reverse-domain syntax."
+    },
+    "appcast": {
+      "type": "string",
+      "format": "uri",
+      "description": "A URL to the plugin’s updating JSON file."
+    },
+    "compatibleVersion": {
+      "type": "string",
+      "description": "The minimum version of Sketch required to run the plugin."
+    },
+    "maxCompatibleVersion": {
+      "type": "string",
+      "description": "The maximum version of Sketch supported by the plugin."
+    },
+    "commands": {
+      "type": "array",
+      "description": "An array of objects defining all commands provided by the plugin.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the command used within the Plugins menu."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "A unique identifier of the command within the plugin bundle."
+          },
+          "shortcut": {
+            "type": "string",
+            "description": "Provides a default keyboard shortcut for the command, e.g. cmd alt ctrl shift t"
+          },
+          "script": {
+            "type": "string",
+            "description": "The relative path to the script implementing the command."
+          },
+          "handler": {
+            "type": "string",
+            "description": "Specifies the name of function to be called with the command. The function should be declared at the top level of the script, and accepts a single context parameter which contains information such as the current document and selection. If this field is omitted the plugin will default to using a handler named onRun."
+          },
+          "handlers": {
+            "type": "object",
+            "properties": {
+              "run": {
+                "type": "string",
+                "description": "The function that should be called when the command is run."
+              },
+              "setUp": {
+                "type": "string",
+                "description": "The function to call before the command is called."
+              },
+              "tearDown": {
+                "type": "string",
+                "description": "The function to call after the command has finished to run."
+              },
+              "onDocumentChanged": {
+                "type": "string",
+                "description": "The function to call when the [document changes](https://developer.sketch.com/plugins/document-changes)."
+              },
+              "actions": {
+                "type": "object",
+                "description": "An object mapping [actions](https://developer.sketch.com/plugins/actions) to functions."
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": ["name", "identifier", "script"]
+      }
+    },
+    "menu": {
+      "type": "object",
+      "properties": {
+        "isRoot": {
+          "type": "boolean",
+          "description": "Specifies that menu items are created directly within the Plugins menu in Sketch. By default Sketch creates a submenu for the plugin. This value is not supported for submenus."
+        },
+        "items": {
+          "type": "array",
+          "description": "An array of menu items.",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "title": {
+          "type": "string",
+          "description": "The human-readable title for the menu item."
+        }
+      }
+    },
+    "disableCocoaScriptPreprocessor": {
+      "type": "boolean",
+      "description": "Disables CocoaScript preprocessor features."
+    },
+    "icon": {
+      "type": "string",
+      "description": "The path to the plugin icon."
+    },
+    "scope": {
+      "type": "string",
+      "enum": ["document", "application"],
+      "description": "Specifies if the plugin can be run without an open Sketch document."
+    },
+    "suppliesData": {
+      "type": "boolean",
+      "description": "Specifies if the plugin is a data supplier."
+    }
+  },
+  "required": ["name", "description", "version", "identifier", "commands"]
+}

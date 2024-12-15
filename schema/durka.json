@@ -62,7 +62,7 @@
       "type": "string",
       "default": "any",
       "description": "指定项目所使用的环境",
-      "enum": ["node", "browser", "electron", "vscode", "any"]
+      "enum": ["node", "browser", "electron", "vscode", "sketch", "any"]
     },
     "framework": {
       "type": "string",
